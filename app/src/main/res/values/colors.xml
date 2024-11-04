@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="status_color">#EDE8DC</color>
+
+    <color name="colorPrimary">#FF000000</color>
+    <color name="light_dark">#3C3D37</color>
 </resources>

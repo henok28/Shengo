@@ -43,11 +43,11 @@ public class BaseDashboared extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.lawyersrecycler);
-        LawyersData l1 = new LawyersData("Abel\nMulugeta","60", R.drawable.trialcolor);
-        LawyersData l2 = new LawyersData("Meron\nAlemayehu","23", R.drawable.trialcolor);
-        LawyersData l3 = new LawyersData("Fitsum\nHailemariam","76", R.drawable.firstcream);
-        LawyersData l4 = new LawyersData("Selam\nMulugeta","88", R.drawable.firstcream);
-        LawyersData l5 = new LawyersData("Kebede\nAsfaw","100", R.drawable.firstcream);
+        LawyersData l1 = new LawyersData("Abel\nMulugeta","60", R.drawable.meronaaaaa);
+        LawyersData l2 = new LawyersData("Meron\nAlemayehu","23", R.drawable.meronaaaaa);
+        LawyersData l3 = new LawyersData("Fitsum\nHailemariam","76", R.drawable.meronaaaaa);
+        LawyersData l4 = new LawyersData("Selam\nMulugeta","88", R.drawable.meronaaaaa);
+        LawyersData l5 = new LawyersData("Kebede\nAsfaw","100", R.drawable.meronaaaaa);
         lawyersDataList.add(l1);
         lawyersDataList.add(l2);
         lawyersDataList.add(l3);

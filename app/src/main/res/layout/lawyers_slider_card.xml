@@ -5,21 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="300dp"
     android:layout_margin="8dp"
+
     app:cardCornerRadius="30dp"
     app:cardElevation="20dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#3EB489">
+        android:background="#16423C">
 
-        <!-- ImageView (Background) -->
+        <!-- ImageView (Background)3EB489 -->
         <ImageView
             android:id="@+id/lawyerimage"
             android:layout_width="200dp"
             android:layout_height="400dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/trialcolor"
+            android:src="@drawable/meronaaaaa"
 
 
             />
@@ -41,9 +42,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Case Won 100+"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="13dp"
+                android:fontFamily="@font/noto_sans"
                 android:padding="10dp"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/rounded_corner_for_lawyer_contact"/>
 
             <TextView
@@ -52,9 +55,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:padding="5dp"
+                android:fontFamily="@font/bebas_neue"
                 android:text="Alexi\nTurner"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="30dp"
+                android:layout_marginBottom="29dp"
 
 
                 />
