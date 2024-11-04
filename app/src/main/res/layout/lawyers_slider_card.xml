@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#3EB489">
+
+        <!-- ImageView (Background) -->
+        <ImageView
+            android:id="@+id/lawyerimage"
+            android:layout_width="200dp"
+            android:layout_height="400dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/trialcolor"
+
+
+            />
+
+        <!-- LinearLayout containing TextViews (Overlay) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_alignBottom="@id/lawyerimage"
+            android:layout_alignLeft="@id/lawyerimage"
+            android:layout_alignTop="@id/lawyerimage"
+            android:layout_alignParentStart="true"
+            >
+
+            <TextView
+                android:id="@+id/casewon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Case Won 100+"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:padding="10dp"
+                android:background="@drawable/rounded_corner_for_lawyer_contact"/>
+
+            <TextView
+                android:id="@+id/lawyername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:padding="5dp"
+                android:text="Alexi\nTurner"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+
+
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+
+                >
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="-4dp"
+                    android:background="@drawable/rounded_corner_for_lawyer_contact"
+                    android:padding="15dp"
+                    android:src="@drawable/messenger"
+
+
+                    />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="-4dp"
+                    android:background="@drawable/rounded_corner_for_lawyer_contact"
+                    android:padding="15dp"
+                    android:src="@drawable/telephone"
+
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
