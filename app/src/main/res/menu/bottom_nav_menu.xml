@@ -5,15 +5,15 @@
         android:icon="@drawable/home"
         android:title="Home" />
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_lawyer"
         android:icon="@drawable/findlawyer"
         android:title="Lawyer" />
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_resource"
         android:icon="@drawable/resources"
         android:title="Resources" />
     <item
-        android:id="@+id/message"
+        android:id="@+id/navigation_message"
         android:icon="@drawable/message"
         android:title="Message" />
 </menu>

@@ -46,59 +46,17 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginTop="12dp"
-        android:orientation="vertical"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <TextView
-            android:id="@+id/header1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Legal Help, Your Way"
-            android:textColor="#16423C"
-            android:fontFamily="@font/noto_sans_bold"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/header1"
-            android:layout_marginTop="28dp"
-            android:text="Find Top Class\nLawyers"
-            android:textColor="#16423C"
-            android:textSize="39sp" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/recyclerViewContainer"
+    <FrameLayout
+        android:id="@+id/framedashboared"
         android:layout_width="0dp"
-        android:layout_height="390dp"
-
-        android:orientation="vertical"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lawyersrecycler"
-            android:layout_width="match_parent"
-
-            android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 
-            />
 
-    </LinearLayout>
 
 
     <LinearLayout
