@@ -45,9 +45,9 @@ public class DataFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        textViewTitle = view.findViewById(R.id.textViewTitle);
-        textViewDescription = view.findViewById(R.id.textViewDescription);
-        imageView = view.findViewById(R.id.imageView);
+        textViewTitle = view.findViewById(R.id.texttitle);
+        textViewDescription = view.findViewById(R.id.textdescription);
+        imageView = view.findViewById(R.id.titleimage);
 
         Bundle args = getArguments();
        if (getArguments() != null) {
