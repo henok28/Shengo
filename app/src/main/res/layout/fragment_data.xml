@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -7,29 +8,38 @@
     android:padding="16dp">
 
     <!-- ImageView for an image or icon -->
+    <TextView
+        android:id="@+id/texttitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/bebas_neue"
+        android:text="@string/header1"
+        android:textColor="@color/black"
+        android:lineSpacingExtra="-19dp"
+
+
+        android:textSize="60sp" />
+
+    <TextView
+        android:id="@+id/textdescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:lineSpacingExtra="-4dp"
+
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/noto_sans"
+        android:text="@string/des1"
+
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/ic_launcher_foreground"
-        android:contentDescription="Image" />
-
-    <!-- TextView for title or main text -->
-    <TextView
-        android:id="@+id/textViewTitle"
+        android:id="@+id/titleimage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Title Text"
-        android:textSize="20sp"
-        android:layout_marginTop="16dp" />
-
-    <!-- TextView for description or subtitle -->
-    <TextView
-        android:id="@+id/textViewDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Description Text"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp" />
+        android:layout_height="305dp"
+        android:layout_marginVertical="10dp"
+        android:src="@drawable/image1"/>
 
 </LinearLayout>

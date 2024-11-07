@@ -2,4 +2,19 @@
     <string name="app_name">ShengoApp0</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //Headers
+
+    <string name="header1">Welcome To Shengo</string>
+
+
+    <string name="header2">Find Lawyers Effortlessly</string>
+    <string name="header3">Access Legal Knowledge</string>
+    <string name="header4">Seamless Support</string>
+
+    //Description
+    <string name="des1">Connecting you with trusted legal professionals</string>
+    <string name="des2">Browse lawyer profiles to find the right match for your legal concern</string>
+    <string name="des3">Explore our comprehensive legal repository with articles, proclamations, and rules to stay informed.</string>
+    <string name="des4">Save time by managing your legal interactions in one place—reach out to lawyers and access legal resources easily.</string>
 </resources>
