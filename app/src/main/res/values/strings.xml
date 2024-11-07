@@ -2,4 +2,13 @@
     <string name="app_name">ShengoApp0</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="not_yet_registered_signup_now">Not yet registered? SignUp Now</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="not_yet_registered_sign_up_now">Not yet registered? Sign Up Now</string>
+    <string name="username">Username</string>
+    <string name="already_have_an_account_login">Already have an account? Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">Email</string>
+    <string name="full_name">Full Name</string>
 </resources>
