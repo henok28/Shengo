@@ -33,7 +33,7 @@
                     android:id="@+id/header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Legal Help, Your Way"
+                    android:text="@string/legal_help_your_way"
                     android:textColor="#16423C"
                     android:fontFamily="@font/noto_sans_bold"
                     android:textSize="18sp"
@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
-                    android:text="Find Top Class\nLawyers"
+                    android:text="@string/find_top_class_nlawyers"
                     android:textColor="#16423C"
                     android:textSize="39sp" />
 

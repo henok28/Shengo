@@ -5,16 +5,22 @@
 
     //Headers
 
-    <string name="header1">Welcome To Shengo</string>
+    <string name="header1" translatable="false">Welcome To Shengo</string>
 
 
-    <string name="header2">Find Lawyers Effortlessly</string>
-    <string name="header3">Access Legal Knowledge</string>
-    <string name="header4">Seamless Support</string>
+    <string name="header2" translatable="false">Find Lawyers Effortlessly</string>
+    <string name="header3" translatable="false">Access Legal Knowledge</string>
+    <string name="header4" translatable="false">Seamless Support</string>
 
     //Description
-    <string name="des1">Connecting you with trusted legal professionals</string>
-    <string name="des2">Browse lawyer profiles to find the right match for your legal concern</string>
-    <string name="des3">Explore our comprehensive legal repository with articles, proclamations, and rules to stay informed.</string>
-    <string name="des4">Save time by managing your legal interactions in one place—reach out to lawyers and access legal resources easily.</string>
+    <string name="des1" translatable="false">Connecting you with trusted legal professionals</string>
+    <string name="des2" translatable="false">Browse lawyer profiles to find the right match for your legal concern</string>
+    <string name="des3" translatable="false">Explore our comprehensive legal repository with articles, proclamations, and rules to stay informed.</string>
+    <string name="des4" translatable="false">Save time by managing your legal interactions in one place—reach out to lawyers and access legal resources easily.</string>
+
+
+
+    <string name="hello_nabel_mulugeta">Hello\nAbel Mulugeta!</string>
+    <string name="legal_help_your_way">Legal Help, Your Way</string>
+    <string name="find_top_class_nlawyers">Find Top Class\nLawyers</string>
 </resources>

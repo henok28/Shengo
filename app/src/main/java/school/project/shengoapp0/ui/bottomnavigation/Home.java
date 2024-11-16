@@ -1,5 +1,8 @@
 package school.project.shengoapp0.ui.bottomnavigation;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.adapters.dashboaredadapter.LawyerSliderAdapter;
@@ -43,6 +47,7 @@ public class Home extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        loadLocale(getContext());
         recyclerView = view.findViewById(R.id.lawyersrecycler);
         LawyersData l1 = new LawyersData("Abel\nMulugeta","60", R.drawable.meronaaaaa);
         LawyersData l2 = new LawyersData("Meron\nAlemayehu","23", R.drawable.meronaaaaa);
@@ -60,5 +65,15 @@ public class Home extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(adapter);
+    }
+
+    public static void loadLocale(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String language = prefs.getString("My_Lang", "en"); // Default to English if no preference
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Configuration config = context.getResources().getConfiguration();
+        config.setLocale(locale);
+        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
 }

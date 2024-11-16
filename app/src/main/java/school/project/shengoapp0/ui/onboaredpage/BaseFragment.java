@@ -65,7 +65,7 @@ public class BaseFragment extends Fragment {
                 if (currentItem < adapter.getItemCount()-1){
                     viewPager.setCurrentItem(currentItem+1, false);
                 }else {
-                    ((MainActivity) requireActivity()).swapFragments(new BaseDashboared());
+                    ((MainActivity) requireActivity()).swapFragments(new Signup());
                     SharedPreferences onBoardingPreferences= requireActivity().getSharedPreferences("myAppOnboardState", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor  = onBoardingPreferences.edit();
                     editor.putBoolean("hasSeenOnboarding", true);

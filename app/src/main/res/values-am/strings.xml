@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ShengoApp0</string>
+
+    <string name="hello_nabel_mulugeta">ሰላም\nአቤል ሙሉጌታ!</string>
+    <string name="legal_help_your_way">የህግ እርዳታ, በእርስዎ መንገድ</string>
+    <string name="find_top_class_nlawyers">ታላላቅ ጠበቆችን ያግኙ</string>
+</resources>

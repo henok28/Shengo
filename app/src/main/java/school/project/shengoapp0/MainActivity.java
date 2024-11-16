@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(hasSeenOnBoarding){
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frameLayout, new BaseDashboared());
+            transaction.replace(R.id.frameLayout, new Signup());
             transaction.commit();
         }else {
             swapFragments(new BaseFragment());
