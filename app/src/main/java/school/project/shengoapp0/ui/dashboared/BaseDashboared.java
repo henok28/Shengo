@@ -1,5 +1,7 @@
 package school.project.shengoapp0.ui.dashboared;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,11 +11,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.slidingpanelayout.widget.SlidingPaneLayout;
 
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -22,19 +28,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import school.project.shengoapp0.MainActivity;
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.adapters.dashboaredadapter.LawyerSliderAdapter;
 import school.project.shengoapp0.model.LawyersData;
+import school.project.shengoapp0.ui.autentication.Login;
 import school.project.shengoapp0.ui.bottomnavigation.FindLawyer;
 import school.project.shengoapp0.ui.bottomnavigation.Home;
 import school.project.shengoapp0.ui.bottomnavigation.Message;
 import school.project.shengoapp0.ui.bottomnavigation.Resources;
+import school.project.shengoapp0.ui.bottomnavigation.Settings;
+import school.project.shengoapp0.ui.settings.BaseSettings;
 
 public class BaseDashboared extends Fragment {
-
-    RecyclerView recyclerView;
-    List<LawyersData> lawyersDataList = new ArrayList<>();
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,9 +67,26 @@ public class BaseDashboared extends Fragment {
         fragmentTransaction.replace(R.id.framedashboared, new Home());
         fragmentTransaction.commit();
 
+
+//        SlidingPaneLayout slidingPaneLayout = view.findViewById(R.id.sliding_pane_layout);
+//        ImageView profilePic = view.findViewById(R.id.profile_pic);
+//        BottomNavigationView bottom_navigation = view.findViewById(R.id.bottom_navigation);
+
+
+//        profilePic.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (slidingPaneLayout.isOpen()) {
+//                    slidingPaneLayout.closePane();
+//                } else {
+//                    slidingPaneLayout.openPane();
+//                }
+//            }
+//        });
+
+
+
         BottomNavigationView bottom_navigation = view.findViewById(R.id.bottom_navigation);
-
-
 
         bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -75,10 +98,13 @@ public class BaseDashboared extends Fragment {
                     switchFragment(new FindLawyer());
                     return true;
                 } else if (menuItem.getItemId() == R.id.navigation_resource) {
-                    switchFragment(new Resources()); // Replace with your actual fragment
+                    switchFragment(new Resources());
                     return true;
                 } else if (menuItem.getItemId() == R.id.navigation_message) {
-                    switchFragment(new Message()); // Replace with your actual fragment
+                    switchFragment(new Message());
+                    return true;
+                }else if (menuItem.getItemId() == R.id.settings) {
+                    switchFragment(new BaseSettings());
                     return true;
                 }
                 return false;

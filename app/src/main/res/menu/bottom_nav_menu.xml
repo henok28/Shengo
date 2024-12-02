@@ -16,4 +16,9 @@
         android:id="@+id/navigation_message"
         android:icon="@drawable/message"
         android:title="Message" />
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/settings"
+        android:title="Setting" />
 </menu>

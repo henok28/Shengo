@@ -10,6 +10,7 @@
     tools:context=".ui.autentication.Signup">
 
     <!-- Centered CardView for Signup Form -->
+
     <ToggleButton
         android:id="@+id/languageToggleButton"
         android:layout_width="wrap_content"
@@ -26,7 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         app:cardCornerRadius="30dp"
-        app:cardElevation="20dp">
+        android:layout_marginTop="12dp"
+        app:cardElevation="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,9 +51,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:id="@+id/fullName"
+                android:id="@+id/firstName"
                 android:drawablePadding="8dp"
-                android:hint="Full Name"
+                android:hint="First Name"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="40dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:id="@+id/lastName"
+                android:drawablePadding="8dp"
+                android:hint="Last Name"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:layout_marginTop="40dp" />
@@ -60,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:id="@+id/emailInput"
+                android:id="@+id/email"
 
                 android:drawablePadding="8dp"
                 android:hint="Email"
@@ -73,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:id="@+id/passwordInput"
+                android:id="@+id/passWord"
                 android:drawablePadding="8dp"
                 android:hint="Password"
                 android:padding="8dp"
@@ -85,28 +97,22 @@
                 android:id="@+id/signupButton"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-
                 android:text="Signup"
                 android:textSize="20sp"
                 android:textColor="@color/white"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/black" />
+            <TextView
+                android:id="@+id/loginText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:text="Already have an Account"/>
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
     <!-- the button is used for redirecting to login-->
-    <Button
-        android:id="@+id/loginText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
-        android:padding="8dp"
-        android:text="Already have an account login"
-        android:textSize="14sp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:backgroundTint="@android:color/transparent"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="40dp"
-        tools:ignore="RtlCompat" />
 </FrameLayout>

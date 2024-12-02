@@ -58,6 +58,8 @@ public class BaseFragment extends Fragment {
         });
 
         nextBtn = view.findViewById(R.id.nextbutton);
+        SharedPreferences onBoardingPreferences= requireActivity().getSharedPreferences("myAppOnboardState", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor  = onBoardingPreferences.edit();
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,8 +68,6 @@ public class BaseFragment extends Fragment {
                     viewPager.setCurrentItem(currentItem+1, false);
                 }else {
                     ((MainActivity) requireActivity()).swapFragments(new Signup());
-                    SharedPreferences onBoardingPreferences= requireActivity().getSharedPreferences("myAppOnboardState", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor  = onBoardingPreferences.edit();
                     editor.putBoolean("hasSeenOnboarding", true);
                     editor.apply();
                 }
@@ -79,6 +79,8 @@ public class BaseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity) requireActivity()).swapFragments(new Signup());
+                editor.putBoolean("hasSeenOnboarding", true);
+                editor.apply();
             }
         });
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

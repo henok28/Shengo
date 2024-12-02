@@ -8,7 +8,8 @@
     <color name="colorPrimary">#FF000000</color>
     <color name="light_dark">#3C3D37</color>
 
-    <color name="status_color">#EDE8DC</color>
+<!--    <color name="status_color">#EDE8DC</color>-->
+    <color name="status_color">#EEB4B4</color>
     <color name="ivory_cream">#EDE8DC</color>
 
 

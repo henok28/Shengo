@@ -8,20 +8,30 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import school.project.shengoapp0.MainActivity;
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.adapters.dashboaredadapter.LawyerSliderAdapter;
 import school.project.shengoapp0.model.LawyersData;
+import school.project.shengoapp0.ui.autentication.Login;
 
 public class Home extends Fragment {
     RecyclerView recyclerView;
@@ -47,6 +57,31 @@ public class Home extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+//        Button logout = view.findViewById(R.id.btn_logout);
+//
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SharedPreferences loginSharedPreference = requireActivity().getSharedPreferences("myAppLoginStatus", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor = loginSharedPreference.edit();
+//                editor.putBoolean("hasSeenLogin", false);
+//                editor.apply();
+//
+//                SharedPreferences signupStat = requireActivity().getSharedPreferences("SignupStatus", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor1 = signupStat.edit();
+//                editor1.putBoolean("Signup", true);
+//                editor1.apply();
+//
+//
+//
+//                Toast.makeText(requireActivity(), "Logout Successfully", Toast.LENGTH_SHORT).show();
+//                ((MainActivity)requireActivity()).swapFragments(new Login());
+//            }
+//        });
+
+
         loadLocale(getContext());
         recyclerView = view.findViewById(R.id.lawyersrecycler);
         LawyersData l1 = new LawyersData("Abel\nMulugeta","60", R.drawable.meronaaaaa);
@@ -65,6 +100,34 @@ public class Home extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(adapter);
+
+
+
+
+//        BottomNavigationView bottom_navigation = view.findViewById(R.id.bottom_navigation);
+//        bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//                if (menuItem.getItemId() == R.id.navigation_home) {
+//                    switchFragment(new Home());
+//                    return true;
+//                } else if (menuItem.getItemId() == R.id.navigation_lawyer) {
+//                    switchFragment(new FindLawyer());
+//                    return true;
+//                } else if (menuItem.getItemId() == R.id.navigation_resource) {
+//                    switchFragment(new Resources()); // Replace with your actual fragment
+//                    return true;
+//                } else if (menuItem.getItemId() == R.id.navigation_message) {
+//                    switchFragment(new Message()); // Replace with your actual fragment
+//                    return true;
+//                }else if (menuItem.getItemId() == R.id.settings) {
+//                    switchFragment(new Message()); // Replace with your actual fragment
+//                    return true;
+//                }
+//                return false;
+//            }
+//
+//        });
     }
 
     public static void loadLocale(Context context) {
@@ -75,5 +138,12 @@ public class Home extends Fragment {
         Configuration config = context.getResources().getConfiguration();
         config.setLocale(locale);
         context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+    }
+
+    public void switchFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.framedashboared, fragment);
+        fragmentTransaction.commit();
     }
 }
