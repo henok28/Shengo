@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -58,8 +59,15 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ImageView iv_sidebar = view.findViewById(R.id.sideNav);
+        iv_sidebar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) requireActivity()).swapFragments(new SideBar());
+            }
+        });
 
-//        Button logout = view.findViewById(R.id.btn_logout);
+//        Button logout = view.findViewById(R.id.logout);
 //
 //        logout.setOnClickListener(new View.OnClickListener() {
 //            @Override

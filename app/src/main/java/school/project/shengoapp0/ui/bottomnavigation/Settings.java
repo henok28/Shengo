@@ -20,7 +20,6 @@ import android.widget.Spinner;
 import school.project.shengoapp0.MainActivity;
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.ui.autentication.VerificationForm;
-import school.project.shengoapp0.ui.onboaredpage.BaseFragment;
 
 
 public class Settings extends Fragment {
@@ -38,32 +37,14 @@ public class Settings extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button upgradeBtn = view.findViewById(R.id.upgrade);
-        RadioGroup genderRadioGroup = view.findViewById(R.id.radioGroupGender);
+
 
         upgradeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ((MainActivity)requireActivity()).swapFragments(new VerificationForm());
             }
         });
-
-        try {
-            genderRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-                if (checkedId == R.id.radioMale) {
-                    Log.d("GenderSelection", "Male selected");
-                } else if (checkedId == R.id.radioFemale) {
-                    Log.d("GenderSelection", "Female selected");
-                } else {
-                    Log.d("GenderSelection", "No gender selected");
-                }
-            });
-        }catch (NullPointerException e){
-            Log.d("GenderSelection", "onViewCreated: "+e);
-        }
-
-
-
-
 
     }
 

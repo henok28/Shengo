@@ -1,16 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="30dp"
-    tools:context=".ui.bottomnavigation.Resources">
+    android:background="@color/white"
+    android:paddingLeft="15dp"
+    android:paddingTop="43dp"
+    android:paddingRight="15dp"
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:textSize="32sp"
+    >
+
+    <!-- Search Section -->
+    <LinearLayout
+        android:id="@+id/search_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/search_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search your books here"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <EditText
+
+                android:id="@+id/search_input"
+                android:layout_alignParentStart="true"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_toStartOf="@id/search_button"
+                android:background="@drawable/edit_text_background"
+                android:hint="Search title, topic and author"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/black"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:id="@+id/search_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:padding="12dp"
+                android:src="@drawable/search0"
+                android:contentDescription="Search button"
+                app:tint="@color/black" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!-- Categories Section -->
+    <RelativeLayout
+        android:id="@+id/categories_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_container"
+        android:layout_marginTop="24dp">
+
+        <TextView
+            android:id="@+id/categories_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categories"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/see_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="See all"
+            android:textColor="@color/black"
+            android:padding="4dp" />
+
+        <HorizontalScrollView
+            android:id="@+id/categories_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/categories_label"
+            android:layout_marginTop="12dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/category_classics"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Articles"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    app:strokeColor="@android:color/black"
+                    app:strokeWidth="1dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/category_horror"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@android:color/black"
+                    android:text="Proclamations"
+
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Directives"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    app:strokeColor="@android:color/black"
+                    app:strokeWidth="1dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Law Books"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    app:strokeColor="@android:color/black"
+                    app:strokeWidth="1dp" />
+
+                <!-- Add other category buttons with the same style -->
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/book_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello Resources" />
+        android:layout_below="@id/categories_container"
+        android:layout_marginTop="16dp"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp" />
 
-</FrameLayout>
+</RelativeLayout>

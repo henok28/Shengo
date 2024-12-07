@@ -12,6 +12,9 @@
     <color name="status_color">#EEB4B4</color>
     <color name="ivory_cream">#EDE8DC</color>
 
+    <color name="next_button_color">#000000</color>
+    <color name="submit_button_color">#000000</color>
+
 
 
 </resources>

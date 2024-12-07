@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MainActivity", "Swapping fragments...");
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frameLayout, fragment);
+        transaction.addToBackStack(null);
         transaction.commit();
         Log.d("MainActivity", "Fragment swapped.");
     }

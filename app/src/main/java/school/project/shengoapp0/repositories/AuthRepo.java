@@ -31,7 +31,7 @@ import school.project.shengoapp0.retrofit.AuthService;
 public class AuthRepo {
     private AuthService authService;
     private Application application;
-    private String BASEURL = "http://192.168.251.196:8000/";
+    private String BASEURL = "http://192.168.179.196:8000/";
     MutableLiveData<String> signupToken = new MutableLiveData<>();
     MutableLiveData<String> signupError = new MutableLiveData<>();
 

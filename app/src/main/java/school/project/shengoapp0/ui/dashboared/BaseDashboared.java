@@ -1,6 +1,7 @@
 package school.project.shengoapp0.ui.dashboared;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -38,7 +39,6 @@ import school.project.shengoapp0.ui.bottomnavigation.Home;
 import school.project.shengoapp0.ui.bottomnavigation.Message;
 import school.project.shengoapp0.ui.bottomnavigation.Resources;
 import school.project.shengoapp0.ui.bottomnavigation.Settings;
-import school.project.shengoapp0.ui.settings.BaseSettings;
 
 public class BaseDashboared extends Fragment {
 
@@ -104,7 +104,7 @@ public class BaseDashboared extends Fragment {
                     switchFragment(new Message());
                     return true;
                 }else if (menuItem.getItemId() == R.id.settings) {
-                    switchFragment(new BaseSettings());
+                    switchFragment(new Settings());
                     return true;
                 }
                 return false;
@@ -130,16 +130,16 @@ public class BaseDashboared extends Fragment {
 //        recyclerView.setLayoutManager(layoutManager);
 //
 //        recyclerView.setAdapter(adapter);
+
+
     }
+
 
     public void switchFragment(Fragment fragment) {
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.framedashboared, fragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
-
-
-
 }
