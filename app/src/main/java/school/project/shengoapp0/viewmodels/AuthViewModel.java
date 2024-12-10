@@ -13,7 +13,7 @@ public class AuthViewModel extends AndroidViewModel {
 
     public AuthViewModel(@NonNull Application application) {
         super(application);
-        authRepository = new AuthRepo();
+        authRepository = new AuthRepo(application);
     }
 
     public void sendSignupRequest(String firstname, String lastname, String email, String password){

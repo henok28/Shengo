@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,6 @@ import school.project.shengoapp0.MainActivity;
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.adapters.onboardingadapter.OnboardingPagerAdapter;
 import school.project.shengoapp0.ui.autentication.Signup;
-import school.project.shengoapp0.ui.dashboared.BaseDashboared;
 
 public class BaseFragment extends Fragment {
     private ViewPager2 viewPager;
@@ -40,8 +40,9 @@ public class BaseFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
+        super.onViewCreated(view, savedInstanceState);
+        Log.d("OnBaseFragment", "onViewCreated: "+"running");
         dotIndicator = view.findViewById(R.id.indicator_layout);
 
         viewPager = view.findViewById(R.id.viewPager);
@@ -67,9 +68,9 @@ public class BaseFragment extends Fragment {
                 if (currentItem < adapter.getItemCount()-1){
                     viewPager.setCurrentItem(currentItem+1, false);
                 }else {
-                    ((MainActivity) requireActivity()).swapFragments(new Signup());
                     editor.putBoolean("hasSeenOnboarding", true);
                     editor.apply();
+                    ((MainActivity)(requireActivity())).swapFragments(new Signup());
                 }
             }
         });
@@ -78,9 +79,12 @@ public class BaseFragment extends Fragment {
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) requireActivity()).swapFragments(new Signup());
+//                ((MainActivity) requireActivity()).swapFragments(new Signup());
                 editor.putBoolean("hasSeenOnboarding", true);
                 editor.apply();
+//                ((OnboardingBaseActivity)(requireActivity())).navigateToAuth();
+                ((MainActivity)(requireActivity())).swapFragments(new Signup());
+
             }
         });
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

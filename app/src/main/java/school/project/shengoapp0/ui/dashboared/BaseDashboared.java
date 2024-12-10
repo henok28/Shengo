@@ -56,90 +56,129 @@ public class BaseDashboared extends Fragment {
         return inflater.inflate(R.layout.fragment_base_dashboared, container, false);
     }
 
+    private FragmentManager fragmentManager;
+    boolean isHomeLoaded = true;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //i created this so that for the first time when the base gets populated to the
-        //main the Home fragment would be displayed
-        FragmentManager fragmentManager = getChildFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.framedashboared, new Home());
-        fragmentTransaction.commit();
 
 
-//        SlidingPaneLayout slidingPaneLayout = view.findViewById(R.id.sliding_pane_layout);
-//        ImageView profilePic = view.findViewById(R.id.profile_pic);
-//        BottomNavigationView bottom_navigation = view.findViewById(R.id.bottom_navigation);
+        if (isHomeLoaded){
+            switchFragment(new Home());
+        }
 
+        BottomNavigationView bottom_navigation = view.findViewById(R.id.bottom_navigation);;
+        if (bottom_navigation == null){return;}
+        bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
 
-//        profilePic.setOnClickListener(new View.OnClickListener() {
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment fragment = null;
+                if (menuItem.getItemId() == R.id.navigation_home) {
+                    isHomeLoaded = false;
+                    fragment = new Home();
+                } else if (menuItem.getItemId() == R.id.navigation_lawyer) {
+                    isHomeLoaded = false;
+                    fragment = new FindLawyer();
+                } else if (menuItem.getItemId() == R.id.navigation_resource) {
+                    isHomeLoaded = false;
+                    fragment = new Resources();
+                } else if (menuItem.getItemId() == R.id.navigation_message) {
+                    isHomeLoaded = false;
+                    fragment = new Message();
+                } else if (menuItem.getItemId() == R.id.navigation_settings) {
+                    isHomeLoaded = false;
+                    fragment = new Settings();
+                }
+
+                if (fragment != null) {
+                    switchFragment(fragment);
+                }
+                return true;
+            }
+        });
+
+//        fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
 //            @Override
-//            public void onClick(View v) {
-//                if (slidingPaneLayout.isOpen()) {
-//                    slidingPaneLayout.closePane();
-//                } else {
-//                    slidingPaneLayout.openPane();
+//            public void onBackStackChanged() {
+//                if (isAdded()){
+//                    Fragment currentFragment = getChildFragmentManager().findFragmentById(R.id.framedashboared);
+//                    if (currentFragment != null){
+//                        syncBottomNavWithFragment(currentFragment);
+//                    }
 //                }
 //            }
 //        });
 
-
-
-        BottomNavigationView bottom_navigation = view.findViewById(R.id.bottom_navigation);
-
-        bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if (menuItem.getItemId() == R.id.navigation_home) {
-                    switchFragment(new Home());
-                    return true;
-                } else if (menuItem.getItemId() == R.id.navigation_lawyer) {
-                    switchFragment(new FindLawyer());
-                    return true;
-                } else if (menuItem.getItemId() == R.id.navigation_resource) {
-                    switchFragment(new Resources());
-                    return true;
-                } else if (menuItem.getItemId() == R.id.navigation_message) {
-                    switchFragment(new Message());
-                    return true;
-                }else if (menuItem.getItemId() == R.id.settings) {
-                    switchFragment(new Settings());
-                    return true;
-                }
-                return false;
-            }
-
-        });
-
-
-//        recyclerView = view.findViewById(R.id.lawyersrecycler);
-//        LawyersData l1 = new LawyersData("Abel\nMulugeta","60", R.drawable.meronaaaaa);
-//        LawyersData l2 = new LawyersData("Meron\nAlemayehu","23", R.drawable.meronaaaaa);
-//        LawyersData l3 = new LawyersData("Fitsum\nHailemariam","76", R.drawable.meronaaaaa);
-//        LawyersData l4 = new LawyersData("Selam\nMulugeta","88", R.drawable.meronaaaaa);
-//        LawyersData l5 = new LawyersData("Kebede\nAsfaw","100", R.drawable.meronaaaaa);
-//        lawyersDataList.add(l1);
-//        lawyersDataList.add(l2);
-//        lawyersDataList.add(l3);
-//        lawyersDataList.add(l4);
-//        lawyersDataList.add(l5);
-//        LawyerSliderAdapter adapter = new LawyerSliderAdapter(lawyersDataList);
-//
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-//        recyclerView.setLayoutManager(layoutManager);
-//
-//        recyclerView.setAdapter(adapter);
-
-
     }
+
+//    private void syncBottomNavWithFragment(Fragment fragment) {
+//        try {
+//            int selectedItemId = R.id.navigation_home;
+//
+//            if (fragment instanceof Home) {
+//                selectedItemId = R.id.navigation_home;
+//            } else if (fragment instanceof FindLawyer) {
+//                selectedItemId = R.id.navigation_lawyer;
+//            } else if (fragment instanceof Resources) {
+//                selectedItemId = R.id.navigation_resource;
+//            } else if (fragment instanceof Message) {
+//                selectedItemId = R.id.navigation_message;
+//            } else if (fragment instanceof Settings) {
+//                selectedItemId = R.id.navigation_settings;
+//            }
+//
+//            if (bottom_navigation.getSelectedItemId() != selectedItemId) {
+//                bottom_navigation.setSelectedItemId(selectedItemId);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void clearBackStack(){
+        if (fragmentManager!=null){
+            for (int i = 0; i<fragmentManager.getBackStackEntryCount();i++){
+                fragmentManager.popBackStackImmediate();
+            }
+        }
+    }
+
+
+//    public void switchFragment(Fragment fragment, boolean addToBackStack) {
+//        try {
+//            if (!isAdded() && fragmentManager!=null){
+//                FragmentManager fragmentManager = getChildFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.framedashboared, fragment);
+//                if (addToBackStack){
+//                    fragmentTransaction.addToBackStack(null);
+//                }
+//                fragmentTransaction.commit();
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
 
 
     public void switchFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getChildFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.framedashboared, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        getChildFragmentManager()
+                .beginTransaction()
+                .replace(R.id.framedashboared, fragment)
+                .addToBackStack(null)
+                .commit();
     }
+
+//    public void handleBackPress() {
+//        FragmentManager fm = getChildFragmentManager();
+//        if (fm.getBackStackEntryCount() > 0) {
+//            fm.popBackStack();
+//            // Update bottom nav to show Home
+//            bottom_navigation.setSelectedItemId(R.id.navigation_home);
+//        }
+//    }
+
 }

@@ -15,7 +15,7 @@ public class ResourceViewModel extends AndroidViewModel {
     private ResourceRepo resourceRepo;
     public ResourceViewModel(@NonNull Application application) {
         super(application);
-        resourceRepo = new ResourceRepo();
+        resourceRepo = new ResourceRepo(application);
     }
     public void getResourceData(){
         resourceRepo.getResourceData();

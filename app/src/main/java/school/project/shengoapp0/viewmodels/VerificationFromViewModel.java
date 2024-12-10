@@ -17,7 +17,7 @@ public class VerificationFromViewModel extends AndroidViewModel {
 
     public VerificationFromViewModel(@NonNull Application application) {
         super(application);
-        formRepository = new FormRepo();
+        formRepository = new FormRepo(application);
 
     }
 

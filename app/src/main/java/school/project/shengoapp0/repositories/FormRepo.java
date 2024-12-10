@@ -1,5 +1,6 @@
 package school.project.shengoapp0.repositories;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
@@ -22,9 +23,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import school.project.shengoapp0.model.VerificationFormModal;
 import school.project.shengoapp0.retrofit.VerificationService;
+import school.project.shengoapp0.serviceapi.RetrofitInstance;
+import school.project.shengoapp0.serviceapi.ShengoApiInterface;
 
 public class FormRepo {
     private VerificationService formService;
+    ShengoApiInterface shengoApiInterface;
+    Context context;
     private String BASEURL = "http://192.168.179.196:8000/";
     private MutableLiveData<String> formResponse = new MutableLiveData<>();
     private MutableLiveData<String> formError = new MutableLiveData<>();
@@ -45,21 +50,9 @@ public class FormRepo {
         this.formError = error;
     }
 
-    public FormRepo() {
-//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//
-//        // Attaching the logging interceptor to OkHttpClient
-//        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-//                .addInterceptor(loggingInterceptor)
-//                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASEURL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        formService = retrofit.create(VerificationService.class);
+    public FormRepo(Context context) {
+        this.context = context.getApplicationContext();
+        this.shengoApiInterface = RetrofitInstance.getService(context);
     }
 
     public void submitForm(String fullNameValue, String phoneNumberValue, String dateOfBirthValue,
@@ -85,9 +78,8 @@ public class FormRepo {
         RequestBody idPhotoRequestBody = RequestBody.create(MediaType.parse("image/*"), idPhotoFile);
         MultipartBody.Part idPhoto = MultipartBody.Part.createFormData("id_photo", idPhotoFile.getName(), idPhotoRequestBody);
 
-
         // Call the service method to submit the form data
-        Call<VerificationFormModal> call = formService.submitFrom(
+        Call<VerificationFormModal> call = shengoApiInterface.submitFrom(
                 token,
                 fullName,
                 phoneNumber,

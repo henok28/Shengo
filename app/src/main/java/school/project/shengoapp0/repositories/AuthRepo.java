@@ -1,6 +1,7 @@
 package school.project.shengoapp0.repositories;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -27,11 +28,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import school.project.shengoapp0.model.AuthCustomResponseModal;
 import school.project.shengoapp0.model.UsersAutModal;
 import school.project.shengoapp0.retrofit.AuthService;
+import school.project.shengoapp0.serviceapi.RetrofitInstance;
+import school.project.shengoapp0.serviceapi.ShengoApiInterface;
 
 public class AuthRepo {
     private AuthService authService;
-    private Application application;
-    private String BASEURL = "http://192.168.179.196:8000/";
+    ShengoApiInterface shengoApiInterface;
+    private Context context;
     MutableLiveData<String> signupToken = new MutableLiveData<>();
     MutableLiveData<String> signupError = new MutableLiveData<>();
 
@@ -64,38 +67,38 @@ public class AuthRepo {
         return signupError;
     }
 
-    public AuthRepo() {
-
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        //attaching it to okhttp
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .build();
-
-        Interceptor headerInterceptor = new Interceptor() {
-            @NonNull
-            @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-                Request originalRequest = chain.request();
-                Request modifiedRequest = originalRequest.newBuilder()
-                        .addHeader("Accept", "application/json") // Set header
-                        .build();
-                return chain.proceed(modifiedRequest);
-            }
-        };
-
-        Retrofit retrofit= new Retrofit.Builder()
-                .baseUrl(BASEURL)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        application = new Application();
-
-        authService = retrofit.create(AuthService.class);
+    public AuthRepo(Context context) {
+        this.context = context.getApplicationContext();
+        this.shengoApiInterface = RetrofitInstance.getService(this.context);
+//        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+//        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//
+//        //attaching it to okhttp
+//        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//                .addInterceptor(loggingInterceptor)
+//                .build();
+//
+//        Interceptor headerInterceptor = new Interceptor() {
+//            @NonNull
+//            @Override
+//            public okhttp3.Response intercept(Chain chain) throws IOException {
+//                Request originalRequest = chain.request();
+//                Request modifiedRequest = originalRequest.newBuilder()
+//                        .addHeader("Accept", "application/json") // Set header
+//                        .build();
+//                return chain.proceed(modifiedRequest);
+//            }
+//        };
+//
+//        Retrofit retrofit= new Retrofit.Builder()
+//                .baseUrl(BASEURL)
+//                .client(okHttpClient)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        application = new Application();
+//
+//        authService = retrofit.create(AuthService.class);
     }
-
 
     public void SendSignupRequest(String firstname,
                                   String lastname,
@@ -112,8 +115,7 @@ public class AuthRepo {
 
 
 
-        Call<AuthCustomResponseModal> call = authService.SignUp(usersAutModal);
-
+        Call<AuthCustomResponseModal> call = shengoApiInterface.SignUp(usersAutModal);
         call.enqueue(new Callback<AuthCustomResponseModal>() {
             @Override
             public void onResponse(Call<AuthCustomResponseModal> call, Response<AuthCustomResponseModal> response) {
@@ -144,19 +146,16 @@ public class AuthRepo {
             public void onFailure(Call<AuthCustomResponseModal> call, Throwable throwable) {
 //                Toast.makeText(application, "Failed", Toast.LENGTH_SHORT).show();
                 Log.d("onFailure", "Error: "+throwable.getMessage());
-
-
             }
         });
 
     }
-
     public void SendLoginRequest(String email, String password){
         UsersAutModal usersAutModal = new UsersAutModal(email, password);
 
         Gson gson1 = new Gson();
         String jsonLog = gson1.toJson(usersAutModal);
-        Call<AuthCustomResponseModal> call = authService.Login(usersAutModal);
+        Call<AuthCustomResponseModal> call = shengoApiInterface.Login(usersAutModal);
         call.enqueue(new Callback<AuthCustomResponseModal>() {
             @Override
             public void onResponse(Call<AuthCustomResponseModal> call, Response<AuthCustomResponseModal> response) {
@@ -186,8 +185,6 @@ public class AuthRepo {
                 Log.d("Login on Failure", "onFailure: "+throwable.getMessage());
             }
         });
-
-
     }
 
 }

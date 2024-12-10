@@ -32,6 +32,7 @@ import school.project.shengoapp0.MainActivity;
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.adapters.dashboaredadapter.LawyerSliderAdapter;
 import school.project.shengoapp0.model.LawyersData;
+import school.project.shengoapp0.ui.autentication.BaseAuthenticationActivity;
 import school.project.shengoapp0.ui.autentication.Login;
 
 public class Home extends Fragment {
@@ -63,7 +64,7 @@ public class Home extends Fragment {
         iv_sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) requireActivity()).swapFragments(new SideBar());
+                ((MainActivity)(requireActivity())).swapFragments(new SideBar());
             }
         });
 
@@ -148,10 +149,5 @@ public class Home extends Fragment {
         context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
 
-    public void switchFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getChildFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.framedashboared, fragment);
-        fragmentTransaction.commit();
-    }
+
 }

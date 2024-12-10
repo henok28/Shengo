@@ -18,7 +18,7 @@
         android:title="Message" />
 
     <item
-        android:id="@+id/settings"
+        android:id="@+id/navigation_settings"
         android:icon="@drawable/settings"
         android:title="Setting" />
 </menu>

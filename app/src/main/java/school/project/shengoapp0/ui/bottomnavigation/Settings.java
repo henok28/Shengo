@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import java.nio.charset.MalformedInputException;
+
 import school.project.shengoapp0.MainActivity;
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.ui.autentication.VerificationForm;
@@ -42,7 +44,8 @@ public class Settings extends Fragment {
         upgradeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)requireActivity()).swapFragments(new VerificationForm());
+                if (getActivity() != null)
+                    ((MainActivity)requireActivity()).swapFragments(new VerificationForm());
             }
         });
 

@@ -1,5 +1,6 @@
 package school.project.shengoapp0.repositories;
 
+import android.content.Context;
 import android.speech.RecognitionService;
 import android.util.Log;
 
@@ -19,29 +20,28 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import school.project.shengoapp0.model.Book;
 import school.project.shengoapp0.model.ResourceModal;
 import school.project.shengoapp0.retrofit.ResourceService;
+import school.project.shengoapp0.serviceapi.RetrofitInstance;
+import school.project.shengoapp0.serviceapi.ShengoApiInterface;
 
 public class ResourceRepo {
-    ResourceService resourceService;
+    Context context;
+    ShengoApiInterface shengoApiInterface;
     private String BASEURL = "http://192.168.179.196:8000";
-    private String token = "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTkyLjE2OC4xNzkuMTk2OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MzM0ODIyOTgsImV4cCI6MTczMzQ4NTg5OCwibmJmIjoxNzMzNDgyMjk4LCJqdGkiOiJsbUZVbjJ1VDc0ZUZmc1hnIiwic3ViIjoiYmRlNzNjY2UtODYwZC00YzRjLWExMzAtYjJhYjMzY2I3OTRiIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.bSZH7WD8OeLuLrQ7ZKeSDq9TVBzwRVW9OBITr30_2qE";
+    private String token = "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTkyLjE2OC4xLjU6ODAwMC9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTczMzgyMjE0NSwiZXhwIjoxNzMzODI1NzQ1LCJuYmYiOjE3MzM4MjIxNDUsImp0aSI6IkJ0TENwU09DM04ybWl1anUiLCJzdWIiOiJiZGU3M2NjZS04NjBkLTRjNGMtYTEzMC1iMmFiMzNjYjc5NGIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.U2z5n7HU3Ia04lbZ9WXOhuSSWbqIH7OPJmZWbmbTGsY";
     private MutableLiveData<List<Book>> ResourceResponse = new MutableLiveData<>();
 
     public MutableLiveData<List<Book>> getResourceResponse() {
         return ResourceResponse;
     }
 
-    public  ResourceRepo(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASEURL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        resourceService = retrofit.create(ResourceService.class);
+    public  ResourceRepo(Context context){
+        this.context = context.getApplicationContext();
+        this.shengoApiInterface = RetrofitInstance.getService(context);
     }
 
     public void getResourceData(){
 
-        Call<List<ResourceModal>> call = resourceService.getResource(token);
+        Call<List<ResourceModal>> call = shengoApiInterface.getResource(token);
 
         call.enqueue(new Callback<List<ResourceModal>>() {
             @Override

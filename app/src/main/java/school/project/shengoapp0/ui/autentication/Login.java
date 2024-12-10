@@ -112,8 +112,10 @@ public class Login extends Fragment {
     }
     private void handleToken(String token){
         if (token!=null && !token.isEmpty()){
-            ((MainActivity) requireActivity()).swapFragments(new BaseDashboared());
             Toast.makeText(requireActivity(), "Welcome", Toast.LENGTH_SHORT).show();
+//            ((BaseAuthenticationActivity) requireActivity()).navigateToDashboared();
+            ((MainActivity) requireActivity()).swapFragments(new BaseDashboared());
+
             authViewModel.resetSignupTokenMutableData();
 
         }
