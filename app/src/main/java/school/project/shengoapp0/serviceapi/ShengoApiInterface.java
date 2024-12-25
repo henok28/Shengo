@@ -14,8 +14,10 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import school.project.shengoapp0.model.AuthCustomResponseModal;
 import school.project.shengoapp0.model.ResourceModal;
+import school.project.shengoapp0.model.SubscriptionRequestObj;
 import school.project.shengoapp0.model.UsersAutModal;
 import school.project.shengoapp0.model.VerificationFormModal;
+import school.project.shengoapp0.model.modelforsubscription.SubscriptionResponse;
 
 public interface ShengoApiInterface {
     @Headers("Accept: application/json")
@@ -48,5 +50,17 @@ public interface ShengoApiInterface {
             @Part("city") RequestBody city,
             @Part("state") RequestBody state,
             @Part MultipartBody.Part profilePicture,
-            @Part MultipartBody.Part idPhoto);
+            @Part MultipartBody.Part idPhotoFront,
+            @Part MultipartBody.Part idPhotoBack
+    );
+
+    @Headers("Accept: application/json")
+    @POST("api/initializeSubscription")
+    Call<SubscriptionResponse> subscribe(@Header("Authorization")String token, @Body SubscriptionRequestObj subscriptionRequestObj);
+
+
+    @Headers("Accept: application/json")
+    @GET("api/client/statusreturn")
+    Call<AuthCustomResponseModal> getSubscriptionStatus(@Header("Authorization")String token);
+
 }

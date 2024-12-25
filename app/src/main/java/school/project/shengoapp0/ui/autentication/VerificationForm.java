@@ -4,12 +4,14 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -39,19 +41,24 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import school.project.shengoapp0.MainActivity;
 import school.project.shengoapp0.R;
-import school.project.shengoapp0.model.VerificationFormModal;
+import school.project.shengoapp0.ui.others.VerificationState;
 import school.project.shengoapp0.viewmodels.VerificationFromViewModel;
 
 public class VerificationForm extends Fragment {
     private VerificationFromViewModel verificationFromViewModel;
     private ViewFlipper viewFlipper;
     private static final int PROFILE_IMAGE_REQUEST = 1;
-    private static final int ID_IMAGE_REQUEST = 2;
+    private static final int ID_IMAGE_REQUEST_FRONT = 2;
+    private static final int ID_IMAGE_REQUEST_BACK = 3;
     private File profileImageFile = null;
-    private File idImageFile = null;
+    private File idImageFile_Front = null;
+    private File idImageFile_Back = null;
     private ImageView ivProfilePicture;
-    private ImageView ivIdPhoto;
+    private ImageView ivIdPhotoFront;
+
+    private ImageView ivIdPhotoBack;
 
     private Button btnPrev;
     private Button btnNext;
@@ -78,15 +85,35 @@ public class VerificationForm extends Fragment {
         setupListeners();
         updateNavigationButtons();
 
+//        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),
+//                new OnBackPressedCallback(true) {
+//                    @Override
+//                    public void handleOnBackPressed() {
+//                        if (currentPage > 1) {
+//                            // If we're on the second page, go back to first page
+//                            viewFlipper.showPrevious();
+//                            currentPage--;
+//                            updateNavigationButtons();
+//                        } else {
+//                            // If we're on the first page, allow normal back navigation
+//                            setEnabled(false);
+//                            requireActivity().onBackPressed();
+//                        }
+//                    }
+//                });
+
         ivProfilePicture = view.findViewById(R.id.iv_profile_picture);
-        ivIdPhoto = view.findViewById(R.id.iv_id_photo);
+        ivIdPhotoFront = view.findViewById(R.id.front_photo);
+        ivIdPhotoBack = view.findViewById(R.id.back_photo);
 
         // Setup upload buttons
         Button btnUploadProfile = view.findViewById(R.id.btn_upload_profile);
-        Button btnUploadId = view.findViewById(R.id.btn_upload_id);
+        Button btnUploadId = view.findViewById(R.id.btn_upload_front);
+        Button btnUploadIdBack = view.findViewById(R.id.btn_upload_back);
 
         btnUploadProfile.setOnClickListener(v -> selectImage(PROFILE_IMAGE_REQUEST));
-        btnUploadId.setOnClickListener(v -> selectImage(ID_IMAGE_REQUEST));
+        btnUploadId.setOnClickListener(v -> selectImage(ID_IMAGE_REQUEST_FRONT));
+        btnUploadIdBack.setOnClickListener(v->selectImage(ID_IMAGE_REQUEST_BACK));
 
 
         gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -156,7 +183,7 @@ public class VerificationForm extends Fragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            if (requestCode == PROFILE_IMAGE_REQUEST || requestCode == ID_IMAGE_REQUEST) {
+            if (requestCode == PROFILE_IMAGE_REQUEST || requestCode == ID_IMAGE_REQUEST_FRONT || requestCode == ID_IMAGE_REQUEST_BACK) {
                 if (permissions[0].equals(Manifest.permission.CAMERA)) {
                     openCamera(requestCode);
                 } else if (permissions[0].equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {
@@ -205,8 +232,10 @@ public class VerificationForm extends Fragment {
             // Save the file based on request code
             if (requestCode == PROFILE_IMAGE_REQUEST) {
                 profileImageFile = image;
+            } else if (requestCode == ID_IMAGE_REQUEST_BACK) {
+                idImageFile_Back = image;
             } else {
-                idImageFile = image;
+                idImageFile_Front = image;
             }
             return image;
         } catch (IOException e) {
@@ -227,22 +256,34 @@ public class VerificationForm extends Fragment {
                     ivProfilePicture.setImageURI(selectedImage);
                     profileImageFile = getFileFromUri(selectedImage);
                 }
-            } else if (requestCode == ID_IMAGE_REQUEST + 100) {
+            } else if (requestCode == ID_IMAGE_REQUEST_FRONT + 100) {
                 if (data != null && data.getData() != null) {
                     Uri selectedImage = data.getData();
-                    ivIdPhoto.setImageURI(selectedImage);
-                    idImageFile = getFileFromUri(selectedImage);
+                    ivIdPhotoFront.setImageURI(selectedImage);
+                    idImageFile_Front = getFileFromUri(selectedImage);
+                }
+            }
+            else if (requestCode == ID_IMAGE_REQUEST_BACK + 100) {
+                if (data != null && data.getData() != null) {
+                    Uri selectedImage = data.getData();
+                    ivIdPhotoBack.setImageURI(selectedImage);
+                    idImageFile_Back = getFileFromUri(selectedImage);
                 }
             }
             // Handle camera capture
-            else if (requestCode == PROFILE_IMAGE_REQUEST || requestCode == ID_IMAGE_REQUEST) {
-                File imageFile = (requestCode == PROFILE_IMAGE_REQUEST) ? profileImageFile : idImageFile;
+            else if (requestCode == PROFILE_IMAGE_REQUEST || requestCode == ID_IMAGE_REQUEST_FRONT || requestCode == ID_IMAGE_REQUEST_BACK){
+                File imageFile = (requestCode == PROFILE_IMAGE_REQUEST) ? profileImageFile : idImageFile_Front;
+                if (requestCode == ID_IMAGE_REQUEST_BACK) {
+                    imageFile = idImageFile_Back;
+                }
                 if (imageFile != null) {
                     Uri photoUri = Uri.fromFile(imageFile);
                     if (requestCode == PROFILE_IMAGE_REQUEST) {
                         ivProfilePicture.setImageURI(photoUri);
-                    } else {
-                        ivIdPhoto.setImageURI(photoUri);
+                    } else if(requestCode == ID_IMAGE_REQUEST_FRONT){
+                        ivIdPhotoFront.setImageURI(photoUri);
+                    }else{
+                        ivIdPhotoBack.setImageURI(photoUri);
                     }
                 }
             }
@@ -357,10 +398,27 @@ public class VerificationForm extends Fragment {
             phone.setError("Phone number is required");
             return false;
         }
+        if (phone.getText().toString().length()<9  || phone.getText().toString().length()>10){
+            phone.setError("Invalid Phone format");
+            return false;
+        }
         if (day.getText().toString().trim().isEmpty() ||
                 month.getText().toString().trim().isEmpty() ||
                 year.getText().toString().trim().isEmpty()) {
-            Toast.makeText(getContext(), "Please enter complete date of birth", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "date of birth is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (day.getText().toString().length()<2 || day.getText().toString().length()>2) {
+            day.setError("Invalid Day format");
+            return false;
+        }
+
+        if (month.getText().toString().length()<2 || day.getText().toString().length()>2) {
+            month.setError("Invalid Month format");
+            return false;
+        }
+        if (year.getText().toString().length()<4 || day.getText().toString().length()>4) {
+            year.setError("Invalid Year format");
             return false;
         }
 
@@ -426,7 +484,8 @@ public class VerificationForm extends Fragment {
                     City,
                     State,
                     profileImageFile,
-                    idImageFile
+                    idImageFile_Front,
+                    idImageFile_Back
             );
 
             setupFormObservers();
@@ -436,10 +495,10 @@ public class VerificationForm extends Fragment {
     }
 
     private boolean validateImages() {
-        if (profileImageFile == null || idImageFile == null) {
+        if (profileImageFile == null || idImageFile_Front == null ||idImageFile_Back==null) {
             Toast.makeText(
                     getContext(),
-                    "Please upload both profile picture and ID photo",
+                    "Please upload both profile picture and ID photos",
                     Toast.LENGTH_SHORT
             ).show();
             return false;
@@ -453,11 +512,17 @@ public class VerificationForm extends Fragment {
                 new Observer<String>() {
                     @Override
                     public void onChanged(String verificationFormModal) {
+
                         Toast.makeText(
                                 getContext(),
                                 "Success: " + verificationFormModal,
                                 Toast.LENGTH_SHORT
                         ).show();
+                        ((MainActivity)requireActivity()).swapFragments(new VerificationState());
+                        SharedPreferences sharedPreferences = getContext().getSharedPreferences("FormStatus", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("hasSubmittedForm", true);
+                        editor.apply();
                     }
                 }
         );

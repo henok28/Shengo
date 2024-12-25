@@ -8,21 +8,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +24,6 @@ import school.project.shengoapp0.MainActivity;
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.adapters.dashboaredadapter.LawyerSliderAdapter;
 import school.project.shengoapp0.model.LawyersData;
-import school.project.shengoapp0.ui.autentication.BaseAuthenticationActivity;
-import school.project.shengoapp0.ui.autentication.Login;
 
 public class Home extends Fragment {
     RecyclerView recyclerView;
@@ -46,6 +36,7 @@ public class Home extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
 
     @Override
    public View onCreateView(LayoutInflater inflater,
@@ -91,7 +82,7 @@ public class Home extends Fragment {
 //        });
 
 
-        loadLocale(getContext());
+//        loadLocale(getContext());
         recyclerView = view.findViewById(R.id.lawyersrecycler);
         LawyersData l1 = new LawyersData("Abel\nMulugeta","60", R.drawable.meronaaaaa);
         LawyersData l2 = new LawyersData("Meron\nAlemayehu","23", R.drawable.meronaaaaa);
@@ -139,15 +130,16 @@ public class Home extends Fragment {
 //        });
     }
 
-    public static void loadLocale(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        String language = prefs.getString("My_Lang", "en"); // Default to English if no preference
-        Locale locale = new Locale(language);
-        Locale.setDefault(locale);
-        Configuration config = context.getResources().getConfiguration();
-        config.setLocale(locale);
-        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
-    }
+
+//    public static void loadLocale(Context context) {
+//        SharedPreferences prefs = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
+//        String language = prefs.getString("My_Lang", "en"); // Default to English if no preference
+//        Locale locale = new Locale(language);
+//        Locale.setDefault(locale);
+//        Configuration config = context.getResources().getConfiguration();
+//        config.setLocale(locale);
+//        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+//    }
 
 
 }

@@ -25,6 +25,7 @@ import school.project.shengoapp0.model.VerificationFormModal;
 import school.project.shengoapp0.retrofit.VerificationService;
 import school.project.shengoapp0.serviceapi.RetrofitInstance;
 import school.project.shengoapp0.serviceapi.ShengoApiInterface;
+import school.project.shengoapp0.utilities.TokenUtil;
 
 public class FormRepo {
     private VerificationService formService;
@@ -42,6 +43,7 @@ public class FormRepo {
         return formError;
     }
 
+
     public void setFormResponse(MutableLiveData<String> response) {
         this.formResponse = response;
     }
@@ -49,18 +51,20 @@ public class FormRepo {
     public void setFormError(MutableLiveData<String> error) {
         this.formError = error;
     }
+    private TokenUtil tokenUtil;
 
     public FormRepo(Context context) {
         this.context = context.getApplicationContext();
         this.shengoApiInterface = RetrofitInstance.getService(context);
+        this.tokenUtil = new TokenUtil(context);
     }
 
     public void submitForm(String fullNameValue, String phoneNumberValue, String dateOfBirthValue,
                            String genderValue, String residentialAddressValue, String cityValue,
-                           String stateValue, File profilePicFile, File idPhotoFile) {
+                           String stateValue, File profilePicFile, File idPhotoFileFront, File idPhotoFileBack) {
 
 
-        String token = "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTkyLjE2OC4xNzkuMTk2OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MzM0ODIyOTgsImV4cCI6MTczMzQ4NTg5OCwibmJmIjoxNzMzNDgyMjk4LCJqdGkiOiJsbUZVbjJ1VDc0ZUZmc1hnIiwic3ViIjoiYmRlNzNjY2UtODYwZC00YzRjLWExMzAtYjJhYjMzY2I3OTRiIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.bSZH7WD8OeLuLrQ7ZKeSDq9TVBzwRVW9OBITr30_2qE";
+
         // Create the verification form model
         RequestBody fullName = RequestBody.create(MediaType.parse("text/plain"), fullNameValue);
         RequestBody phoneNumber = RequestBody.create(MediaType.parse("text/plain"), phoneNumberValue);
@@ -74,13 +78,16 @@ public class FormRepo {
         RequestBody profilePicRequestBody = RequestBody.create(MediaType.parse("image/*"), profilePicFile);
         MultipartBody.Part profilePicture = MultipartBody.Part.createFormData("profile_picture", profilePicFile.getName(), profilePicRequestBody);
 
-        // Create MultipartBody.Part for ID photo
-        RequestBody idPhotoRequestBody = RequestBody.create(MediaType.parse("image/*"), idPhotoFile);
-        MultipartBody.Part idPhoto = MultipartBody.Part.createFormData("id_photo", idPhotoFile.getName(), idPhotoRequestBody);
+        // Create MultipartBody.Part for ID photo Front
+        RequestBody idPhotoRequestBodyFront = RequestBody.create(MediaType.parse("image/*"), idPhotoFileFront);
+        MultipartBody.Part idPhotoFrontt = MultipartBody.Part.createFormData("id_photo_front", idPhotoFileFront.getName(), idPhotoRequestBodyFront);
+
+        RequestBody idPhotoRequestBodyBack = RequestBody.create(MediaType.parse("image/*"), idPhotoFileBack);
+        MultipartBody.Part idPhotoBack = MultipartBody.Part.createFormData("id_photo_back", idPhotoFileFront.getName(), idPhotoRequestBodyBack);
 
         // Call the service method to submit the form data
         Call<VerificationFormModal> call = shengoApiInterface.submitFrom(
-                token,
+                tokenUtil.getToken(),
                 fullName,
                 phoneNumber,
                 dateOfBirth,
@@ -89,7 +96,8 @@ public class FormRepo {
                 city,
                 state,
                 profilePicture,
-                idPhoto);
+                idPhotoFrontt,
+                idPhotoBack);
 
         call.enqueue(new Callback<VerificationFormModal>() {
             @Override
@@ -101,7 +109,7 @@ public class FormRepo {
                     Gson gson = new Gson();
                     try {
                         VerificationFormModal errorBody = gson.fromJson(response.errorBody().string(), VerificationFormModal.class);
-                        String errorMessage = errorBody.getMessage();
+                        String errorMessage = errorBody.getError();
                         formError.setValue(errorMessage);
                         Log.d("Form Submit Error", "Error: " + errorMessage);
                     } catch (IOException e) {

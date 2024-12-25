@@ -22,26 +22,29 @@ import school.project.shengoapp0.model.ResourceModal;
 import school.project.shengoapp0.retrofit.ResourceService;
 import school.project.shengoapp0.serviceapi.RetrofitInstance;
 import school.project.shengoapp0.serviceapi.ShengoApiInterface;
+import school.project.shengoapp0.utilities.TokenUtil;
 
 public class ResourceRepo {
     Context context;
     ShengoApiInterface shengoApiInterface;
     private String BASEURL = "http://192.168.179.196:8000";
-    private String token = "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTkyLjE2OC4xLjU6ODAwMC9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTczMzgyMjE0NSwiZXhwIjoxNzMzODI1NzQ1LCJuYmYiOjE3MzM4MjIxNDUsImp0aSI6IkJ0TENwU09DM04ybWl1anUiLCJzdWIiOiJiZGU3M2NjZS04NjBkLTRjNGMtYTEzMC1iMmFiMzNjYjc5NGIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.U2z5n7HU3Ia04lbZ9WXOhuSSWbqIH7OPJmZWbmbTGsY";
+
     private MutableLiveData<List<Book>> ResourceResponse = new MutableLiveData<>();
 
     public MutableLiveData<List<Book>> getResourceResponse() {
         return ResourceResponse;
     }
+    TokenUtil tokenUtil;
 
     public  ResourceRepo(Context context){
         this.context = context.getApplicationContext();
         this.shengoApiInterface = RetrofitInstance.getService(context);
+        this.tokenUtil = new TokenUtil(context);
     }
 
     public void getResourceData(){
 
-        Call<List<ResourceModal>> call = shengoApiInterface.getResource(token);
+        Call<List<ResourceModal>> call = shengoApiInterface.getResource(tokenUtil.getToken());
 
         call.enqueue(new Callback<List<ResourceModal>>() {
             @Override

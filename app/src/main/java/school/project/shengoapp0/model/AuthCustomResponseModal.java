@@ -7,15 +7,34 @@ import java.util.Map;
 import okhttp3.ResponseBody;
 
 public class AuthCustomResponseModal {
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    @SerializedName("verification status")
+    private String verificationStatus;
+
+    public String getVerificationStatus() {
+        return verificationStatus;
+    }
+
+    public String getSubscriptionStatus() {
+        return subscriptionStatus;
+    }
+
+    @SerializedName("subscription status")
+    private String subscriptionStatus;
     @SerializedName("message")
     private String message;
 
     @SerializedName("error")
     private String loginError;
-    private String access_token;
+    private String token;
     // Getters
     public String getAccess_token() {
-        return access_token;
+        return token;
     }
     public String getMessage() {
         return message;

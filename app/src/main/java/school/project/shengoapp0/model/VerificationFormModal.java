@@ -5,6 +5,11 @@ import com.google.gson.annotations.SerializedName;
 public class VerificationFormModal {
     private String message;
     private Data data;
+    private String error;
+
+    public String getError() {
+        return error;
+    }
 
     // Getters and Setters
     public String getMessage() {

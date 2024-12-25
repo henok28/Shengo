@@ -39,6 +39,7 @@ import school.project.shengoapp0.ui.bottomnavigation.Home;
 import school.project.shengoapp0.ui.bottomnavigation.Message;
 import school.project.shengoapp0.ui.bottomnavigation.Resources;
 import school.project.shengoapp0.ui.bottomnavigation.Settings;
+import school.project.shengoapp0.utilities.AuthStatUtil;
 
 public class BaseDashboared extends Fragment {
 
@@ -58,19 +59,25 @@ public class BaseDashboared extends Fragment {
 
     private FragmentManager fragmentManager;
     boolean isHomeLoaded = true;
+    AuthStatUtil authStatUtil;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-
-        if (isHomeLoaded){
+        authStatUtil = new AuthStatUtil(requireContext());
+        boolean isUserSubscribed = authStatUtil.getSubscriptionStatus();
+        if (isHomeLoaded) {
             switchFragment(new Home());
         }
 
-        BottomNavigationView bottom_navigation = view.findViewById(R.id.bottom_navigation);;
-        if (bottom_navigation == null){return;}
+        BottomNavigationView bottom_navigation = view.findViewById(R.id.bottom_navigation);
+        if (bottom_navigation == null) {
+            return;
+        }
+
+        if (!isUserSubscribed){
+            bottom_navigation.getMenu().removeItem(R.id.navigation_message);
+        }
         bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
 
@@ -100,68 +107,7 @@ public class BaseDashboared extends Fragment {
             }
         });
 
-//        fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-//            @Override
-//            public void onBackStackChanged() {
-//                if (isAdded()){
-//                    Fragment currentFragment = getChildFragmentManager().findFragmentById(R.id.framedashboared);
-//                    if (currentFragment != null){
-//                        syncBottomNavWithFragment(currentFragment);
-//                    }
-//                }
-//            }
-//        });
-
     }
-
-//    private void syncBottomNavWithFragment(Fragment fragment) {
-//        try {
-//            int selectedItemId = R.id.navigation_home;
-//
-//            if (fragment instanceof Home) {
-//                selectedItemId = R.id.navigation_home;
-//            } else if (fragment instanceof FindLawyer) {
-//                selectedItemId = R.id.navigation_lawyer;
-//            } else if (fragment instanceof Resources) {
-//                selectedItemId = R.id.navigation_resource;
-//            } else if (fragment instanceof Message) {
-//                selectedItemId = R.id.navigation_message;
-//            } else if (fragment instanceof Settings) {
-//                selectedItemId = R.id.navigation_settings;
-//            }
-//
-//            if (bottom_navigation.getSelectedItemId() != selectedItemId) {
-//                bottom_navigation.setSelectedItemId(selectedItemId);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-    public void clearBackStack(){
-        if (fragmentManager!=null){
-            for (int i = 0; i<fragmentManager.getBackStackEntryCount();i++){
-                fragmentManager.popBackStackImmediate();
-            }
-        }
-    }
-
-
-//    public void switchFragment(Fragment fragment, boolean addToBackStack) {
-//        try {
-//            if (!isAdded() && fragmentManager!=null){
-//                FragmentManager fragmentManager = getChildFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.framedashboared, fragment);
-//                if (addToBackStack){
-//                    fragmentTransaction.addToBackStack(null);
-//                }
-//                fragmentTransaction.commit();
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//    }
 
 
     public void switchFragment(Fragment fragment) {
@@ -171,14 +117,5 @@ public class BaseDashboared extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
-
-//    public void handleBackPress() {
-//        FragmentManager fm = getChildFragmentManager();
-//        if (fm.getBackStackEntryCount() > 0) {
-//            fm.popBackStack();
-//            // Update bottom nav to show Home
-//            bottom_navigation.setSelectedItemId(R.id.navigation_home);
-//        }
-//    }
 
 }

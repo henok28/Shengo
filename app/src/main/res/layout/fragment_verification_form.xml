@@ -227,17 +227,34 @@
                     android:layout_marginBottom="8dp"/>
 
                 <ImageView
-                    android:id="@+id/iv_id_photo"
+                    android:id="@+id/front_photo"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@drawable/image_background"
                     android:layout_marginBottom="8dp"/>
 
                 <Button
-                    android:id="@+id/btn_upload_id"
+                    android:id="@+id/btn_upload_front"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Upload ID Photo"
+                    android:text="Upload Front"
+                    android:background="@drawable/button_upload"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginBottom="16dp"/>
+
+
+                <ImageView
+                    android:id="@+id/back_photo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/image_background"
+                    android:layout_marginBottom="8dp"/>
+
+                <Button
+                    android:id="@+id/btn_upload_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload Back"
                     android:background="@drawable/button_upload"
                     android:textColor="#FFFFFF"
                     android:layout_marginBottom="16dp"/>

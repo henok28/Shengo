@@ -179,6 +179,7 @@
 
 
                     <RelativeLayout
+                        android:id="@+id/logout_btn"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:background="#F2F9FF"
@@ -285,6 +286,7 @@
                                 android:textSize="18sp" />
 
                             <TextView
+                                android:id="@+id/textview_language"
                                 android:layout_width="170dp"
                                 android:layout_height="wrap_content"
 

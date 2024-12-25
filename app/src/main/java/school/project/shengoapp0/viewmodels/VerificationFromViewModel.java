@@ -23,9 +23,9 @@ public class VerificationFromViewModel extends AndroidViewModel {
 
     public void submitForm(String fullName, String phoneNumber, String dateOfBirth,
                            String gender, String residentialAddress, String city,
-                           String state, File profilePicFile, File idPhotoFile) {
+                           String state, File profilePicFile, File idPhotoFileFront, File idPhotoFileBack) {
         formRepository.submitForm(fullName, phoneNumber, dateOfBirth, gender, residentialAddress,
-                city, state, profilePicFile, idPhotoFile);
+                city, state, profilePicFile, idPhotoFileFront, idPhotoFileBack);
     }
 
     public MutableLiveData<String> getFormResponse() {
@@ -45,4 +45,5 @@ public class VerificationFromViewModel extends AndroidViewModel {
         MutableLiveData<String> error = new MutableLiveData<>();
         formRepository.setFormError(error);
     }
+
 }

@@ -1,0 +1,17 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Outer black border with rounded corners -->
+    <item>
+        <shape>
+            <solid android:color="#ffffff" /> <!-- Black border -->
+            <corners android:radius="12dp" /> <!-- Rounded corners for the outer border -->
+        </shape>
+    </item>
+
+    <!-- Inner white background with slightly smaller rounded corners -->
+    <item>
+        <shape>
+            <solid android:color="#FFFFFF" /> <!-- White background -->
+            <corners android:radius="12dp" /> <!-- Rounded corners for the inner background -->
+        </shape>
+    </item>
+</layer-list>

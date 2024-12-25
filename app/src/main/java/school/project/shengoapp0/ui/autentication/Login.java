@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +22,14 @@ import android.widget.Toast;
 import school.project.shengoapp0.MainActivity;
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.ui.dashboared.BaseDashboared;
+import school.project.shengoapp0.utilities.TokenUtil;
 import school.project.shengoapp0.viewmodels.AuthViewModel;
 
 public class Login extends Fragment {
     private AuthViewModel authViewModel;
     Button loginBtn, navigateToSignUp;
     EditText Email, Password;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,10 +45,10 @@ public class Login extends Fragment {
         Password = view.findViewById(R.id.password);
         loginBtn = view.findViewById(R.id.loginButton);
 
+
+
         SharedPreferences loginSharedPreference = requireActivity().getSharedPreferences("myAppLoginStatus", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = loginSharedPreference.edit();
-
-
         authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -61,8 +64,10 @@ public class Login extends Fragment {
                         @Override
                         public void onChanged(String s) {
                             handleToken(s);
+                            TokenUtil tokenUtil = new TokenUtil(getActivity());
                             editor.putBoolean("hasSeenLogin", true);
                             editor.apply();
+                            Log.d("Token from Login Frag", ": "+tokenUtil.getToken());
                         }
                     });
 
