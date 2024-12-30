@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
     private static Retrofit retrofit = null;
-    static String BASE_URL = "http://192.168.1.8:8000/";
+    static String BASE_URL = "http://192.168.255.253:8000/";
 
     public static ShengoApiInterface getService(Context context){
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
@@ -49,4 +49,5 @@ public class RetrofitInstance {
 
         return retrofit.create(ShengoApiInterface.class);
     }
+
 }
