@@ -62,5 +62,4 @@ public interface ShengoApiInterface {
     @Headers("Accept: application/json")
     @GET("api/client/statusreturn")
     Call<AuthCustomResponseModal> getSubscriptionStatus(@Header("Authorization")String token);
-
 }

@@ -1,5 +1,7 @@
 package school.project.shengoapp0.ui.others;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,6 +31,11 @@ public class SuccessSubscriptionPage extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        SharedPreferences sharedPreferences1 = getContext().getSharedPreferences("SeenPage", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences1.edit();
+        editor.putBoolean("seen", true);
+        editor.apply();
+
 
     }
 }

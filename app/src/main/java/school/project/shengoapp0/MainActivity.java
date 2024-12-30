@@ -165,10 +165,10 @@ public class MainActivity extends AppCompatActivity {
 
         boolean hasBeenRemovedFromStack = sharedPreferences1.getBoolean("hasBeenRemovedFromStack", false);
 //        Log.d("after removed stack verification", " " + hasBeenRemovedFromStack+":  "+hasSubmittedForm+"::"+authStatUtil.getVerificationStatus());
-        Log.d("auth_value_&_form", ": "+authStatUtil.getVerificationStatusString().equals("unverified")+": "+!hasSubmittedForm);
+        Log.d("auth_value_&_form", ": "+authStatUtil.getVerificationStatusString().equals("unverified")+": "+hasSubmittedForm);
 
         Log.d("removing stack 01", ": "+hasBeenRemovedFromStack);
-        if (authStatUtil.getVerificationStatusString().equals("unverified") && !hasSubmittedForm){
+        if (authStatUtil.getVerificationStatusString().equals("unverified") && hasSubmittedForm == false){
             hasBeenRemovedFromStack = false;
         }
         Log.d("removing stack 02", ": "+hasBeenRemovedFromStack);
@@ -178,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
                 fragmentManager.popBackStack("VerificationForm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 editor.putBoolean("hasBeenRemovedFromStack  ", true);
                 editor.commit();
-//                Log.d("before removed stackstack", " " + hasBeenRemovedFromStack);
                 return;
             }
         }

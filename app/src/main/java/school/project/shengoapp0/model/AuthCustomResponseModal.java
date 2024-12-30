@@ -13,7 +13,7 @@ public class AuthCustomResponseModal {
         return status;
     }
 
-    @SerializedName("verification status")
+    @SerializedName("verification_status")
     private String verificationStatus;
 
     public String getVerificationStatus() {
@@ -24,7 +24,7 @@ public class AuthCustomResponseModal {
         return subscriptionStatus;
     }
 
-    @SerializedName("subscription status")
+    @SerializedName("subscription_status")
     private String subscriptionStatus;
     @SerializedName("message")
     private String message;

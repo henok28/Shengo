@@ -59,18 +59,25 @@ public class Subscription extends Fragment {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("SubscriptionStatus", Context.MODE_PRIVATE);
 
         boolean subscribed = sharedPreferences.getBoolean("hasSubscribed", false);
-        subscriptionViewModel.getSubscriptionStatus().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                if (s != null) {
-                    Log.d("subscription form sub", "onChanged: " + "Subsc");
-                    ((MainActivity) requireActivity()).swapFragments(new SuccessSubscriptionPage());
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("hasSubscribed", true);
-                    editor.commit();
+
+        SharedPreferences sharedPreferences1 = getContext().getSharedPreferences("SeenPage", Context.MODE_PRIVATE);
+        boolean seen = sharedPreferences1.getBoolean("seen", false);
+
+        if(seen){
+            subscriptionViewModel.getSubscriptionStatus().observe(getViewLifecycleOwner(), new Observer<String>() {
+                @Override
+                public void onChanged(String s) {
+                    if (s != null) {
+                        Log.d("subscription form sub", "onChanged: " + "Subsc");
+                        ((MainActivity) requireActivity()).swapFragments(new SuccessSubscriptionPage());
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("hasSubscribed", true);
+                        editor.commit();
+                    }
                 }
-            }
-        });
+            });
+        }
+
 
 
     initViews(view);
