@@ -64,7 +64,6 @@ public class LawyerAdapterForFindLawyers extends RecyclerView.Adapter<LawyerAdap
 
     // ViewHolder Class
     public static class LawyerViewHolder extends RecyclerView.ViewHolder {
-
         //Remove the imageView because it is not being used any more.
         //private final ImageView lawyerImage;
         private final TextView lawyerName, lawyerSpeciality;

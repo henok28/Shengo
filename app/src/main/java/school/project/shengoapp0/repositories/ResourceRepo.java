@@ -27,8 +27,6 @@ import school.project.shengoapp0.utilities.TokenUtil;
 public class ResourceRepo {
     Context context;
     ShengoApiInterface shengoApiInterface;
-    private String BASEURL = "http://192.168.179.196:8000";
-
     private MutableLiveData<List<Book>> ResourceResponse = new MutableLiveData<>();
 
     public MutableLiveData<List<Book>> getResourceResponse() {

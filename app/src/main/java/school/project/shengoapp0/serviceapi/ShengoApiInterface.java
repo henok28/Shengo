@@ -13,6 +13,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import school.project.shengoapp0.model.AuthCustomResponseModal;
+import school.project.shengoapp0.model.LawyerResponseModal;
 import school.project.shengoapp0.model.ResourceModal;
 import school.project.shengoapp0.model.SubscriptionRequestObj;
 import school.project.shengoapp0.model.UsersAutModal;
@@ -62,4 +63,8 @@ public interface ShengoApiInterface {
     @Headers("Accept: application/json")
     @GET("api/client/statusreturn")
     Call<AuthCustomResponseModal> getSubscriptionStatus(@Header("Authorization")String token);
+
+    @Headers("Accept: application/json")
+    @GET("c/e86e-2b35-4f73-8554")
+    Call<List<LawyerResponseModal>> getLawyers();
 }

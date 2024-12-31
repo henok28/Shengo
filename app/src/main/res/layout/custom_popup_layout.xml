@@ -4,179 +4,224 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="16dp">
+    app:cardCornerRadius="24dp"
+    app:cardElevation="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/white"
-        android:padding="16dp">
+        android:padding="24dp">
 
         <TextView
             android:id="@+id/popupTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Lawyer Detail"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:textColor="@color/black"
-            />
+            android:gravity="center" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:padding="8dp"
-            android:orientation="horizontal"
-            >
+            android:layout_marginBottom="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profileImage"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/profile"
-                android:layout_marginEnd="12dp"
-                android:layout_width="70dp"
-                android:layout_height="70dp"/>
+                />
+            <!--            app:shapeAppearanceOverlay="@style/CircularImageView"-->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp"
+                    android:text="Lawyer Name"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#777777"
+                    android:text="Criminal Law Investigator"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginBottom="16dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="350dp"> <!-- Limit the max height for better visual flow -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="4dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
+                android:paddingBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    android:textSize="15dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="Name: Lawyer Name"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="15dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="Speciality: Criminal Law Investigator"/>
-            </LinearLayout>
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/mail"
+                        android:layout_marginEnd="8dp"
+                        app:tint="#777777" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="Lawyer@gmail.com" />
+                </LinearLayout>
 
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"
-
-            />
-
-
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="400dp">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:padding="10dp"
-                android:orientation="vertical"
-
-                >
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    android:text="Email: lawyer@gmail.com"
-                    />
+                    android:layout_marginBottom="12dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/telephone"
+                        android:layout_marginEnd="8dp"
+                        app:tint="#777777" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="0909090909" />
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:textSize="15dp"
-                    android:text="Phone Number: 0909090909"
-                    android:textColor="@color/black"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    android:text="City: Addis Ababa"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    android:text="Address: Sdjkhfdskjfhsdkj"
-                    />
+                    android:layout_marginBottom="12dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/location"
+                        android:layout_marginEnd="8dp"
+                        app:tint="#777777" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="Addis Ababa" />
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    android:text="Years of experiance: Addis Ababa"
-                    />
+                    android:layout_marginBottom="12dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/address"
+                        android:layout_marginEnd="8dp"
+                        app:tint="#777777" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="Sdjkhfdskjfhsdkj" />
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/expertise"
+                        android:layout_marginEnd="8dp"
+                        app:tint="#777777" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="Years of experience: 5+" />
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/popupDescription"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:textColorHint="@color/black"
+                    android:layout_height="wrap_content"
+                    android:minHeight="100dp"
+                    android:textColorHint="#777777"
                     android:hint="Please Enter Description"
                     android:textColor="@color/black"
                     android:gravity="top|start"
                     android:inputType="textMultiLine"
                     android:scrollbars="vertical"
-                    android:padding="8dp"
-                    android:background="@drawable/edittext_background"
-                    />
+                    android:padding="16dp"
+                    android:background="@drawable/edittext_background_rounded" />
             </LinearLayout>
-
-
-
         </ScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="16dp"
-            android:gravity="center"
-
-            >
+            android:layout_marginTop="24dp"
+            android:gravity="end">
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancelButton"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginEnd="8dp"
-
-                android:backgroundTint="@android:color/black"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#F4F4F4"
                 android:text="Cancel"
-
                 android:textAllCaps="false"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/black"
+                app:elevation="0dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/sendButton"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@android:color/black"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
                 android:text="Send"
-
                 android:textAllCaps="false"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                app:elevation="0dp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
