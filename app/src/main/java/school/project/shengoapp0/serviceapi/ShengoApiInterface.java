@@ -34,7 +34,10 @@ public interface ShengoApiInterface {
 
     @Headers("Accept: application/json")
     @GET("api/client/resources")
-    Call<List<ResourceModal>> getResource(@Header("Authorization")String token);
+    Call<List<ResourceModal>>
+    getResource(
+            @Header("Authorization")
+            String token);
 
 
 
@@ -65,6 +68,6 @@ public interface ShengoApiInterface {
     Call<AuthCustomResponseModal> getSubscriptionStatus(@Header("Authorization")String token);
 
     @Headers("Accept: application/json")
-    @GET("c/e86e-2b35-4f73-8554")
-    Call<List<LawyerResponseModal>> getLawyers();
+    @GET("api/client/find_lawyer")
+    Call<List<LawyerResponseModal>> getLawyers(@Header("Authorization")String token);
 }

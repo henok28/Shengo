@@ -12,12 +12,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,7 +66,13 @@ public class FindLawyer extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        List<LawyerModal> lawyerList = new ArrayList<>();
+        LawyerAdapterForFindLawyers adapter = new LawyerAdapterForFindLawyers(getContext(), new ArrayList<>(), (lawyerModal, position) -> {
+            // Handle item click - you can implement this later or leave it empty for now
+            Toast.makeText(requireContext(), "Clicked: " + lawyerModal.getName(), Toast.LENGTH_SHORT).show();
+            showCustomPopup(lawyerModal);
+        });
+        recyclerView.setAdapter(adapter);
+
 
         lawyersViewModel = new ViewModelProvider(this).get(LawyersViewModel.class);
 
@@ -73,15 +82,7 @@ public class FindLawyer extends Fragment {
             @Override
             public void onChanged(List<LawyerModal> lawyerModals) {
                 if (lawyerModals!=null){
-                    LawyerAdapterForFindLawyers adapter = new LawyerAdapterForFindLawyers(
-                            requireContext(),
-                            lawyerModals,
-                            (lawyer, position) -> {
-                                // Handle item click
-                                Toast.makeText(requireContext(), "Clicked: " + lawyer.getName(), Toast.LENGTH_SHORT).show();
-                                showCustomPopup(lawyer); // Show popup with lawyer details
-                            }
-                    );
+                    adapter.setLawyers(lawyerModals);
                     recyclerView.setAdapter(adapter);
                 }
 
@@ -128,13 +129,34 @@ public class FindLawyer extends Fragment {
 
         // Find views inside the popup
         TextView popupTitle = popupView.findViewById(R.id.popupTitle);
+        TextView lawyerName = popupView.findViewById(R.id.popUpLawyerName);
+        TextView lawyerSpeciality = popupView.findViewById(R.id.speciality);
+        TextView lawyerEmail = popupView.findViewById(R.id.lawyerEmail);
+        TextView lawyerPhone = popupView.findViewById(R.id.lawyerPhone);
+        TextView lawyerCity = popupView.findViewById(R.id.lawyerCity);
+        TextView lawyerAddress = popupView.findViewById(R.id.lawyerAddress);
+        TextView lawyersYearsOfExp = popupView.findViewById(R.id.lawyerExperiance);
+        ImageView lawyersImage = popupView.findViewById(R.id.profileImage);
+
+
+        lawyerName.setText("Lawyer Detail");
+        lawyerName.setText(lawyer.getName());
+        lawyerSpeciality.setText(lawyer.getSpecialty());
+        lawyerEmail.setText(lawyer.getEmail());
+        lawyerPhone.setText(lawyer.getPhone());
+        lawyerCity.setText(lawyer.getCity());
+        lawyerAddress.setText(lawyer.getAddress());
+        lawyersYearsOfExp.setText("Experience: "+lawyer.getYearsOfExperiance());
+
+
+
         EditText popupDescription = popupView.findViewById(R.id.popupDescription);
         Button cancelButton = popupView.findViewById(R.id.cancelButton);
         Button sendButton = popupView.findViewById(R.id.sendButton);
 
+
+
         // Set popup content dynamically based on the clicked lawyer
-        popupTitle.setText("Lawyer Detail: " + lawyer.getName());
-        popupDescription.setText("Speciality: " + lawyer.getSpecialty());
 
         // Create a PopupWindow
         popupWindow = new PopupWindow(

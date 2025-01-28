@@ -84,11 +84,11 @@ public class Home extends Fragment {
 
 //        loadLocale(getContext());
         recyclerView = view.findViewById(R.id.lawyersrecycler);
-        LawyersData l1 = new LawyersData("Abel\nMulugeta","60", R.drawable.meronaaaaa);
-        LawyersData l2 = new LawyersData("Meron\nAlemayehu","23", R.drawable.meronaaaaa);
-        LawyersData l3 = new LawyersData("Fitsum\nHailemariam","76", R.drawable.meronaaaaa);
-        LawyersData l4 = new LawyersData("Selam\nMulugeta","88", R.drawable.meronaaaaa);
-        LawyersData l5 = new LawyersData("Kebede\nAsfaw","100", R.drawable.meronaaaaa);
+        LawyersData l1 = new LawyersData("Blen\nAlemayehu","60", R.drawable.meronaawebcolor);
+        LawyersData l2 = new LawyersData("Meron\nAlemayehu","23", R.drawable.meronaawebcolor);
+        LawyersData l3 = new LawyersData("Blen\nHailemariam","76", R.drawable.meronaawebcolor);
+        LawyersData l4 = new LawyersData("Selam\nMulugeta","88", R.drawable.meronaawebcolor);
+        LawyersData l5 = new LawyersData("Hewan\nAsfaw","100", R.drawable.meronaawebcolor);
         lawyersDataList.add(l1);
         lawyersDataList.add(l2);
         lawyersDataList.add(l3);

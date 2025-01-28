@@ -49,6 +49,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/popUpLawyerName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
@@ -57,11 +58,12 @@
                     android:layout_marginBottom="6dp"
                     android:text="Lawyer Name"/>
                 <TextView
+                    android:id="@+id/speciality"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textColor="#777777"
-                    android:text="Criminal Law Investigator"/>
+                    />
             </LinearLayout>
 
         </LinearLayout>
@@ -95,11 +97,12 @@
                         android:layout_marginEnd="8dp"
                         app:tint="#777777" />
                     <TextView
+                        android:id="@+id/lawyerEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textColor="@color/black"
-                        android:text="Lawyer@gmail.com" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout
@@ -114,11 +117,12 @@
                         android:layout_marginEnd="8dp"
                         app:tint="#777777" />
                     <TextView
+                        android:id="@+id/lawyerPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textColor="@color/black"
-                        android:text="0909090909" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout
@@ -133,11 +137,12 @@
                         android:layout_marginEnd="8dp"
                         app:tint="#777777" />
                     <TextView
+                        android:id="@+id/lawyerCity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textColor="@color/black"
-                        android:text="Addis Ababa" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout
@@ -152,11 +157,12 @@
                         android:layout_marginEnd="8dp"
                         app:tint="#777777" />
                     <TextView
+                        android:id="@+id/lawyerAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textColor="@color/black"
-                        android:text="Sdjkhfdskjfhsdkj" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout
@@ -171,11 +177,11 @@
                         android:layout_marginEnd="8dp"
                         app:tint="#777777" />
                     <TextView
+                        android:id="@+id/lawyerExperiance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:text="Years of experience: 5+" />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <EditText

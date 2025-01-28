@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#16423C">
+        android:background="#465458">
 
         <!-- ImageView (Background)3EB489 -->
         <ImageView
@@ -20,7 +20,7 @@
             android:layout_width="200dp"
             android:layout_height="400dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/meronaaaaa"
+            android:src="@drawable/meronaawebcolor"
 
 
             />

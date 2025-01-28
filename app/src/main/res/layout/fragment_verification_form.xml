@@ -40,6 +40,7 @@
                 <EditText
                     android:id="@+id/et_full_name"
                     android:textColorHint="@color/black"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Full Name"
@@ -51,7 +52,7 @@
                     android:id="@+id/et_phone"
                     android:layout_width="match_parent"
                     android:textColorHint="@color/black"
-
+                    android:textColor="@color/black"
                     android:layout_height="wrap_content"
                     android:hint="Phone Number"
                     android:inputType="phone"
@@ -78,7 +79,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/black"
-
+                        android:textColor="@color/black"
                         android:hint="DD"
                         android:inputType="number"
                         android:background="@drawable/edit_text_background"
@@ -91,7 +92,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/black"
-
+                        android:textColor="@color/black"
                         android:hint="MM"
                         android:inputType="number"
                         android:background="@drawable/edit_text_background"
@@ -104,7 +105,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/black"
-
+                        android:textColor="@color/black"
                         android:hint="YY"
                         android:inputType="number"
                         android:background="@drawable/edit_text_background"
@@ -169,6 +170,7 @@
                     android:id="@+id/et_address"
                     android:layout_width="match_parent"
                     android:textColorHint="@color/black"
+                    android:textColor="@color/black"
                     android:layout_height="wrap_content"
                     android:hint="Residential Address"
                     android:background="@drawable/edit_text_background"
@@ -181,6 +183,7 @@
                     android:layout_height="wrap_content"
                     android:hint="City"
                     android:textColorHint="@color/black"
+                    android:textColor="@color/black"
                     android:background="@drawable/edit_text_background"
                     android:padding="12dp"
                     android:layout_marginBottom="16dp"/>
@@ -191,6 +194,7 @@
                     android:layout_height="wrap_content"
                     android:hint="State"
                     android:textColorHint="@color/black"
+                    android:textColor="@color/black"
                     android:background="@drawable/edit_text_background"
                     android:padding="12dp"
                     android:layout_marginBottom="16dp"/>
@@ -204,9 +208,11 @@
 
                 <ImageView
                     android:id="@+id/iv_profile_picture"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginHorizontal="10dp"
                     android:textColorHint="@color/black"
+                    android:padding="12px"
                     android:background="@drawable/image_background"
                     android:layout_marginBottom="8dp"/>
 
@@ -215,6 +221,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Upload Profile Picture"
+                    android:layout_gravity="center"
                     android:background="@drawable/button_upload"
                     android:textColor="#FFFFFF"
                     android:layout_marginBottom="16dp"/>
@@ -228,8 +235,10 @@
 
                 <ImageView
                     android:id="@+id/front_photo"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:padding="12dp"
                     android:background="@drawable/image_background"
                     android:layout_marginBottom="8dp"/>
 
@@ -238,6 +247,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Upload Front"
+                    android:layout_gravity="center"
                     android:background="@drawable/button_upload"
                     android:textColor="#FFFFFF"
                     android:layout_marginBottom="16dp"/>
@@ -245,8 +255,10 @@
 
                 <ImageView
                     android:id="@+id/back_photo"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:padding="12dp"
                     android:background="@drawable/image_background"
                     android:layout_marginBottom="8dp"/>
 
@@ -255,6 +267,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Upload Back"
+                    android:layout_gravity="center"
                     android:background="@drawable/button_upload"
                     android:textColor="#FFFFFF"
                     android:layout_marginBottom="16dp"/>

@@ -16,6 +16,7 @@ import school.project.shengoapp0.model.LawyerModal;
 import school.project.shengoapp0.model.LawyerResponseModal;
 import school.project.shengoapp0.serviceapi.RetrofitInstance;
 import school.project.shengoapp0.serviceapi.ShengoApiInterface;
+import school.project.shengoapp0.utilities.TokenUtil;
 
 public class LawyersRepo {
     private Context context;
@@ -26,14 +27,16 @@ public class LawyersRepo {
     public MutableLiveData<List<LawyerModal>> getLawyerDataResponse() {
         return lawyerDataResponse;
     }
+    private TokenUtil tokenUtil;
 
     public LawyersRepo(Context context){
         this.context = context.getApplicationContext();
         this.shengoApiInterface = RetrofitInstance.getService(context);
+        this.tokenUtil = new TokenUtil(context.getApplicationContext());
     }
 
     public void getLawyers(){
-        Call<List<LawyerResponseModal>> call = shengoApiInterface.getLawyers();
+        Call<List<LawyerResponseModal>> call = shengoApiInterface.getLawyers(tokenUtil.getToken());
 
         call.enqueue(new Callback<List<LawyerResponseModal>>() {
             @Override
@@ -41,18 +44,20 @@ public class LawyersRepo {
                 if (response.isSuccessful() && response.body() != null){
                     List<LawyerResponseModal> lawyerModals = response.body();
                     List<LawyerModal> lawyers = new ArrayList<>();
+
+
                     for (LawyerResponseModal lawyer:lawyerModals){
-                        String fname = lawyer.getFirstName();
-                        String lname = lawyer.getLastName();
-                        String speciality = lawyer.getPassword();
-                        String email = lawyer.getEmail();
-                        String phoneNum = lawyer.getPhone();
-                        String address = lawyer.getGender();
+                        lawyers.add(new LawyerModal(lawyer.getFirstName()+" "+lawyer.getLastName(),
+                                lawyer.getSpecialization(),
+                                lawyer.getEmail(),
+                                lawyer.getPhoneNumber(),
+                                lawyer.getCity(),
+                                lawyer.getAddress(),
+                                lawyer.getYearOfExperience(),
+                                lawyer.getProfilePicture()));
 
-                        lawyers.add(new LawyerModal(fname, speciality, 12));
-
-                        lawyerDataResponse.setValue(lawyers);
                     }
+                    lawyerDataResponse.setValue(lawyers);
                 }else {
                     Log.d("Lawyer Response", "Failed with code: " + response.errorBody());
                 }
