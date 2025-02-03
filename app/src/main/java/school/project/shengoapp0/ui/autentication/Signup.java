@@ -106,6 +106,7 @@ public class Signup extends Fragment {
 
         languageToggleButton = view.findViewById(R.id.languageToggleButton);
 
+
         SharedPreferences prefs = requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
         String currentLang = prefs.getString("My_Lang", "en");
         languageToggleButton.setChecked(currentLang.equals("am"));

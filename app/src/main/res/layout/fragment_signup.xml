@@ -92,7 +92,6 @@
                 android:textColor="@color/black"
                 android:layout_marginTop="40dp"
                 android:inputType="textPassword" />
-
             <Button
                 android:id="@+id/signupButton"
                 android:layout_width="match_parent"
