@@ -14,6 +14,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import school.project.shengoapp0.model.AuthCustomResponseModal;
 import school.project.shengoapp0.model.LawyerResponseModal;
+import school.project.shengoapp0.model.ProfileModal;
 import school.project.shengoapp0.model.ResourceModal;
 import school.project.shengoapp0.model.SubscriptionRequestObj;
 import school.project.shengoapp0.model.UsersAutModal;
@@ -40,13 +41,23 @@ public interface ShengoApiInterface {
             String token);
 
 
+    @Headers("Accept: application/json")
+    @GET("api/client/resources")
+    Call<ProfileModal>
+    getProfile(
+            @Header("Authorization")
+            String token);
+
+
 
     @Headers("Accept: application/json")
     @POST("api/client/verification")
     @Multipart
     Call<VerificationFormModal> submitFrom(
             @Header("Authorization") String token,
-            @Part("full_name") RequestBody fullName,
+            @Part("first_name") RequestBody fullName,
+            @Part("middle_name") RequestBody middleName,
+            @Part("last_name") RequestBody lastName,
             @Part("phone_number") RequestBody phoneNumber,
             @Part("date_of_birth") RequestBody dateOfBirth,
             @Part("gender") RequestBody gender,

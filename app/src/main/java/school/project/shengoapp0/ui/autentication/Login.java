@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import school.project.shengoapp0.MainActivity;
@@ -27,7 +28,8 @@ import school.project.shengoapp0.viewmodels.AuthViewModel;
 
 public class Login extends Fragment {
     private AuthViewModel authViewModel;
-    Button loginBtn, navigateToSignUp;
+    Button loginBtn;
+    TextView navigateToSignUp;
     EditText Email, Password;
 
 
@@ -46,7 +48,6 @@ public class Login extends Fragment {
         loginBtn = view.findViewById(R.id.loginButton);
 
 
-
         SharedPreferences loginSharedPreference = requireActivity().getSharedPreferences("myAppLoginStatus", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = loginSharedPreference.edit();
         authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
@@ -57,7 +58,7 @@ public class Login extends Fragment {
                 String email = Email.getText().toString();
                 String password = Password.getText().toString();
 
-                if (validateCredentials(email, password)){
+                if (validateCredentials(email, password)) {
 
                     authViewModel.sendLoginRequest(email, password);
                     authViewModel.getLoginToken().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -67,7 +68,7 @@ public class Login extends Fragment {
                             TokenUtil tokenUtil = new TokenUtil(getActivity());
                             editor.putBoolean("hasSeenLogin", true);
                             editor.apply();
-                            Log.d("Token from Login Frag", ": "+tokenUtil.getToken());
+                            Log.d("Token from Login Frag", ": " + tokenUtil.getToken());
                         }
                     });
 
@@ -78,9 +79,6 @@ public class Login extends Fragment {
                         }
                     });
                 }
-
-
-
 
 
             }
@@ -96,27 +94,28 @@ public class Login extends Fragment {
     }
 
     private boolean validateCredentials(String email, String password) {
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             Email.setError("Email Field is required");
             return false;
         }
-        if(password.length() < 6){
+        if (password.length() < 6) {
             Password.setError("Password must have at least 6 characters");
             return false;
         }
 
-        if (!validateEmail(email)){
+        if (!validateEmail(email)) {
             Email.setError("Email Format is invalid!");
             return false;
         }
         return true;
     }
 
-    private boolean validateEmail(String email){
+    private boolean validateEmail(String email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-    private void handleToken(String token){
-        if (token!=null && !token.isEmpty()){
+
+    private void handleToken(String token) {
+        if (token != null && !token.isEmpty()) {
             Toast.makeText(requireActivity(), "Welcome", Toast.LENGTH_SHORT).show();
 //            ((BaseAuthenticationActivity) requireActivity()).navigateToDashboared();
             ((MainActivity) requireActivity()).swapFragments(new BaseDashboared());
@@ -125,8 +124,9 @@ public class Login extends Fragment {
 
         }
     }
-    private void handleError(String message){
-        if (message != null && !message.isEmpty()){
+
+    private void handleError(String message) {
+        if (message != null && !message.isEmpty()) {
             Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show();
             authViewModel.resetSignupErrorMutableData();
         }

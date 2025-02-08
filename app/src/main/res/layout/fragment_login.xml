@@ -4,22 +4,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ivory_cream"
-    android:padding="40dp"
+    android:background="#F5F1E9"
+    android:padding="20dp"
     tools:context=".ui.autentication.Login">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingTop="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello!"
+            android:textSize="32sp"
+            android:textStyle="bold"
+
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to Shengo"
+            android:textSize="16sp"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
 
     <!-- Centered CardView for Login Form -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="500dp"
         android:layout_gravity="center"
         app:cardCornerRadius="20dp"
-        app:cardElevation="10dp">
+        app:cardElevation="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_gravity="center"
             android:padding="24dp"
             android:background="@color/white">
 
@@ -28,9 +54,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/loginText"
                 android:text="Login"
-                android:textSize="36sp"
-                android:textAlignment="center"
+                android:textSize="24sp"
                 android:textStyle="bold"
+                android:textAlignment="center"
                 android:textColor="@color/black" />
 
             <EditText
@@ -38,12 +64,11 @@
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
                 android:id="@+id/emailLog"
-
                 android:drawablePadding="8dp"
                 android:hint="email"
-                android:padding="8dp"
+                android:padding="12dp"
                 android:textColor="@color/black"
-                android:layout_marginTop="40dp" />
+                android:layout_marginTop="20dp" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -52,10 +77,19 @@
                 android:id="@+id/password"
                 android:drawablePadding="8dp"
                 android:hint="Password"
-                android:padding="8dp"
+                android:padding="12dp"
                 android:textColor="@color/black"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:inputType="textPassword" />
+            <TextView
+                android:id="@+id/forget_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password?"
+                android:textSize="14sp"
+                android:textColor="#465458"
+                android:layout_gravity="end"
+                android:layout_marginTop="10dp" />
 
             <Button
                 android:id="@+id/loginButton"
@@ -66,24 +100,26 @@
                 android:textSize="20sp"
                 android:textColor="@color/white"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="@color/black" />
+                android:backgroundTint="#465458" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <!-- Bottom link for Sign Up -->
+            <TextView
+                android:id="@+id/signupText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Don't have an account? Sign Up"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp" />
+
         </LinearLayout>
 
+
     </androidx.cardview.widget.CardView>
-
-    <!-- Bottom Button for Sign Up -->
-    <Button
-        android:id="@+id/signupText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:padding="8dp"
-        android:text="Not yet registered sign up now"
-        android:textSize="14sp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:backgroundTint="@android:color/transparent"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="40dp"
-        tools:ignore="RtlCompat" />
 </FrameLayout>

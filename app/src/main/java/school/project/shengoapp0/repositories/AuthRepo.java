@@ -81,13 +81,16 @@ public class AuthRepo {
     }
 
     public void SendSignupRequest(String firstname,
+                                  String middleName,
                                   String lastname,
                                   String email,
-                                  String passWord) {
-        UsersAutModal usersAutModal = new UsersAutModal(firstname,
+                                  String passWord
+                                  ) {
+        UsersAutModal usersAutModal = new UsersAutModal(firstname,middleName,
                 lastname,
                 email,
-                passWord);
+                passWord
+                );
 
         Gson gson = new Gson();
         Log.d("SignUpRequest", "Sending request: " + gson.toJson(usersAutModal));

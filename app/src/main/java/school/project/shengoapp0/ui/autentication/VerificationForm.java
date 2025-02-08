@@ -64,7 +64,7 @@ public class VerificationForm extends Fragment {
     private Button btnNext;
     private int totalPages = 2;
     private int currentPage = 1;
-    String FirstName, PhoneNumber, Gender, Address, City, State, dateOfBirth;
+    String FirstName, MiddleName, LastName,  PhoneNumber, Gender, Address, City, State, dateOfBirth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -382,15 +382,26 @@ public class VerificationForm extends Fragment {
     }
 
     private boolean validatePersonalDetails() {
-        EditText fullName = getView().findViewById(R.id.et_full_name);
+        EditText firstName = getView().findViewById(R.id.et_full_name);
+        EditText middleName = getView().findViewById(R.id.et_middle_name);
+        EditText lastName = getView().findViewById(R.id.et_last_name);
+
         EditText phone = getView().findViewById(R.id.et_phone);
         EditText day = getView().findViewById(R.id.et_birth_day);
         EditText month = getView().findViewById(R.id.et_birth_month);
         EditText year = getView().findViewById(R.id.et_birth_year);
         RadioGroup gender = getView().findViewById(R.id.radio_group_gender);
 
-        if (fullName.getText().toString().trim().isEmpty()) {
-            fullName.setError("Full name is required");
+        if (firstName.getText().toString().trim().isEmpty()) {
+            firstName.setError("First name is required");
+            return false;
+        }
+        if (middleName.getText().toString().trim().isEmpty()) {
+            middleName.setError("First name is required");
+            return false;
+        }
+        if (lastName.getText().toString().trim().isEmpty()) {
+            lastName.setError("First name is required");
             return false;
         }
 
@@ -426,7 +437,10 @@ public class VerificationForm extends Fragment {
             Toast.makeText(getContext(), "Please select gender", Toast.LENGTH_SHORT).show();
             return false;
         }
-        FirstName = fullName.getText().toString().trim();
+        FirstName = firstName.getText().toString().trim();
+        MiddleName = middleName.getText().toString().trim();
+        LastName = lastName.getText().toString().trim();
+
         PhoneNumber = phone.getText().toString().trim();
         dateOfBirth = String.join(
                 "/",
@@ -477,6 +491,8 @@ public class VerificationForm extends Fragment {
 
             verificationFromViewModel.submitForm(
                     FirstName,
+                    MiddleName,
+                    LastName,
                     PhoneNumber,
                     dateOfBirth,
                     Gender,

@@ -31,7 +31,7 @@ import school.project.shengoapp0.viewmodels.AuthViewModel;
 
 public class Signup extends Fragment {
     Button sigupBtn;
-    EditText FirstName, LastName,Email,Password;
+    EditText FirstName, MiddleName,LastName,Email,Password, ConfirmPassword;
     TextView textBtn;
     private AuthViewModel authViewModel;
     private ToggleButton languageToggleButton;
@@ -53,9 +53,13 @@ public class Signup extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         FirstName = view.findViewById(R.id.firstName);
+        MiddleName = view.findViewById(R.id.middleName);
         LastName = view.findViewById(R.id.lastName);
+
         Email = view.findViewById(R.id.email);
         Password = view.findViewById(R.id.passWord);
+        ConfirmPassword = view.findViewById(R.id.confirmPassword);
+
         sigupBtn = view.findViewById(R.id.signupButton);
 
         textBtn = view.findViewById(R.id.loginText);
@@ -65,13 +69,15 @@ public class Signup extends Fragment {
             @Override
             public void onClick(View v) {
                 String fname = FirstName.getText().toString();
+                String mname = MiddleName.getText().toString();
                 String lname = LastName.getText().toString();
                 String email = Email.getText().toString();
                 String password = Password.getText().toString();
+                String confirmpassword = ConfirmPassword.getText().toString();
 
-                if (validateFields(fname, lname, email, password)){
+                if (validateFields(fname, mname,lname, email, password, confirmpassword)){
 
-                    authViewModel.sendSignupRequest(fname, lname, email, password);
+                    authViewModel.sendSignupRequest(fname,mname ,lname, email, password);
 
 
                     authViewModel.getSignupError().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -161,13 +167,16 @@ public class Signup extends Fragment {
 
 
 
-    private boolean validateFields(String firstName, String lastName, String email, String password){
+    private boolean validateFields(String firstName,String middleName, String lastName, String email, String password, String confirmPass){
         if (firstName.isEmpty()){
             FirstName.setError("First name is required");
             return false;
         }
         if (lastName.isEmpty()){
             LastName.setError("Last name is required");
+            return false;
+        }if (middleName.isEmpty()){
+            MiddleName.setError("Last name is required");
             return false;
         }
         if (email.isEmpty()){
@@ -179,8 +188,13 @@ public class Signup extends Fragment {
             return false;
         }
 
-        if (Password.length() < 6){
+        if (password.length() < 6){
             Password.setError("Password must be at least 6 characters long");
+            return false;
+        }
+
+        if (confirmPass.equals(password)){
+            ConfirmPassword.setError("Password Don't Match");
             return false;
         }
         return true;

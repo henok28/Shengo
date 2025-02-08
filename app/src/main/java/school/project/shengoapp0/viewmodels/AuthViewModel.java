@@ -16,8 +16,8 @@ public class AuthViewModel extends AndroidViewModel {
         authRepository = new AuthRepo(application);
     }
 
-    public void sendSignupRequest(String firstname, String lastname, String email, String password){
-        authRepository.SendSignupRequest(firstname, lastname, email, password);
+    public void sendSignupRequest(String firstname, String middleName,String lastname, String email, String password){
+        authRepository.SendSignupRequest(firstname, middleName ,lastname, email, password);
     }
 
     public void sendLoginRequest(String email, String password){

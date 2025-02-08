@@ -21,10 +21,10 @@ public class VerificationFromViewModel extends AndroidViewModel {
 
     }
 
-    public void submitForm(String fullName, String phoneNumber, String dateOfBirth,
+    public void submitForm(String firstName,String middleName,String lastName, String phoneNumber, String dateOfBirth,
                            String gender, String residentialAddress, String city,
                            String state, File profilePicFile, File idPhotoFileFront, File idPhotoFileBack) {
-        formRepository.submitForm(fullName, phoneNumber, dateOfBirth, gender, residentialAddress,
+        formRepository.submitForm(firstName,middleName,lastName, phoneNumber, dateOfBirth, gender, residentialAddress,
                 city, state, profilePicFile, idPhotoFileFront, idPhotoFileBack);
     }
 

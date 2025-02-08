@@ -1,6 +1,7 @@
 package school.project.shengoapp0.ui.bottomnavigation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import school.project.shengoapp0.MainActivity;
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.adapters.dashboaredadapter.LawyerSliderAdapter;
 import school.project.shengoapp0.model.LawyersData;
+import school.project.shengoapp0.ui.others.MapActivity;
 
 public class Home extends Fragment {
     RecyclerView recyclerView;
@@ -50,6 +52,20 @@ public class Home extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        androidx.cardview.widget.CardView mapViewCardView = view.findViewById(R.id.mapView);
+        // add onclick listener to the map view
+        mapViewCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent to start your MapActivity
+                Intent intent = new Intent(getActivity(), MapActivity.class);
+                // Start the activity
+                startActivity(intent);
+            }
+        });
+
 
         ImageView iv_sidebar = view.findViewById(R.id.sideNav);
         iv_sidebar.setOnClickListener(new View.OnClickListener() {

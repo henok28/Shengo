@@ -59,14 +59,17 @@ public class FormRepo {
         this.tokenUtil = new TokenUtil(context);
     }
 
-    public void submitForm(String fullNameValue, String phoneNumberValue, String dateOfBirthValue,
+    public void submitForm(String firstNameValue, String middleNameValue, String lastNameValue,String phoneNumberValue, String dateOfBirthValue,
                            String genderValue, String residentialAddressValue, String cityValue,
                            String stateValue, File profilePicFile, File idPhotoFileFront, File idPhotoFileBack) {
 
 
 
         // Create the verification form model
-        RequestBody fullName = RequestBody.create(MediaType.parse("text/plain"), fullNameValue);
+        RequestBody firstName = RequestBody.create(MediaType.parse("text/plain"), firstNameValue);
+        RequestBody middleName = RequestBody.create(MediaType.parse("text/plain"), middleNameValue);
+        RequestBody lastName = RequestBody.create(MediaType.parse("text/plain"), lastNameValue);
+
         RequestBody phoneNumber = RequestBody.create(MediaType.parse("text/plain"), phoneNumberValue);
         RequestBody dateOfBirth = RequestBody.create(MediaType.parse("text/plain"), dateOfBirthValue);
         RequestBody gender = RequestBody.create(MediaType.parse("text/plain"), genderValue);
@@ -88,7 +91,9 @@ public class FormRepo {
         // Call the service method to submit the form data
         Call<VerificationFormModal> call = shengoApiInterface.submitFrom(
                 tokenUtil.getToken(),
-                fullName,
+                firstName,
+                middleName,
+                lastName,
                 phoneNumber,
                 dateOfBirth,
                 gender,
