@@ -54,7 +54,8 @@ public class LawyersRepo {
                                 lawyer.getCity(),
                                 lawyer.getAddress(),
                                 lawyer.getYearOfExperience(),
-                                lawyer.getProfilePicture()));
+                                lawyer.getProfilePicture(),
+                                lawyer.getUserId()));
 
                     }
                     lawyerDataResponse.setValue(lawyers);

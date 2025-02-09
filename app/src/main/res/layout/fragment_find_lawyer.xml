@@ -54,22 +54,35 @@
     </RelativeLayout>
 
     <!-- Button Container -->
+
+
+    <!-- RecyclerView -->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:background="@color/white"
+        android:text="filter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/buttonContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:orientation="horizontal"
-        android:layout_marginTop="4dp"
         android:padding="10dp"
-        app:layout_constraintTop_toBottomOf="@id/searchContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/headerText">
 
         <HorizontalScrollView
             android:id="@+id/categories_scroll"
             android:layout_width="match_parent"
-            android:layout_marginTop="12dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:scrollbars="none">
 
             <LinearLayout
@@ -112,12 +125,9 @@
                     android:textColor="@android:color/black"
                     app:strokeColor="@android:color/black"
                     app:strokeWidth="1dp" />
-
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>
-
-    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lawyerRecyclerView"
         android:layout_width="0dp"

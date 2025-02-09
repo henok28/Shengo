@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <!-- Lawyer Profile Picture -->
+    <ImageView
+        android:id="@+id/connected_lawyer_profile"
+
+        android:layout_gravity="center"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="Profile Picture"
+        android:src="@drawable/person_placeholder" />
+
+    <!-- Lawyer Details -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/connected_lawyer_name"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/connected_lawyers_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Connected"
+                android:textColor="@color/light_dark"
+                android:textSize="17dp" />
+
+            <ImageView
+                android:id="@+id/connected_status"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_gravity="start"
+                android:src="@drawable/connected" />
+
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="130dp"
+                android:src="@drawable/con_mes_icon" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!-- Navigation Arrow -->
+    <!-- Removed the arrow  -->
+</LinearLayout>

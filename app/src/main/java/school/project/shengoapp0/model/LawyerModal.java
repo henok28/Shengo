@@ -1,7 +1,15 @@
 package school.project.shengoapp0.model;
 
 public class LawyerModal {
+
+    private String user_id;
+
+    public String getUser_id() {
+        return user_id;
+    }
+
     private String name;
+
     private String specialty;
     private String email;
     private String phone;
@@ -53,7 +61,8 @@ public class LawyerModal {
                        String city,
                        String address,
                        String yearsOfExperiance,
-                       String profilePictureUrl) {
+                       String profilePictureUrl,
+                       String user_id) {
         this.name = name;
         this.specialty = specialty;
         this.address = address;
@@ -62,6 +71,7 @@ public class LawyerModal {
         this.city = city;
         this.yearsOfExperiance = yearsOfExperiance;
         this.profilePictureUrl = profilePictureUrl;
+        this.user_id = user_id;
     }
 
 }
