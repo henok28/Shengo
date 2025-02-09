@@ -10,4 +10,16 @@ public class ConnectedLawyer {
         this.firstName = firstName;
         this.middleName = middleName;
     }
+
+    public String getProPic() {
+        return proPic;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
 }

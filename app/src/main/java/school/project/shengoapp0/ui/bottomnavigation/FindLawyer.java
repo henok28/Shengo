@@ -35,6 +35,7 @@ import java.util.List;
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.adapters.lawyersadpter.LawyerAdapterForFindLawyers;
 import school.project.shengoapp0.model.LawyerModal;
+import school.project.shengoapp0.model.connectedlawyersmodal.ConnectedLawyer;
 import school.project.shengoapp0.viewmodels.ConnectedLawyersViewModel;
 import school.project.shengoapp0.viewmodels.LawyersViewModel;
 import school.project.shengoapp0.viewmodels.PendingLawyersViewModel;
@@ -113,8 +114,6 @@ public class FindLawyer extends Fragment {
         lawyerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 lawyersViewModel.getLawyerData();
                 lawyersViewModel.getLawyer().observe(getViewLifecycleOwner(), new Observer<List<LawyerModal>>() {
                     @Override
@@ -123,8 +122,6 @@ public class FindLawyer extends Fragment {
                             adapter.setLawyers(lawyerModals);
                             recyclerView.setAdapter(adapter);
                         }
-
-
                     }
                 });
 
@@ -135,7 +132,17 @@ public class FindLawyer extends Fragment {
         requestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pendingLawyersViewModel.fetchPendingLawyers();
+                pendingLawyersViewModel.getPendingLawyerData();
+                pendingLawyersViewModel.getPendingLawyerData().observe(getViewLifecycleOwner(), new Observer<List<ConnectedLawyer>>() {
+                    @Override
+                    public void onChanged(List<ConnectedLawyer> connectedLawyers) {
+                        if (connectedLawyers!=null){
+                            adapter.setLawyers(connectedLawyers);
+                        }
+                    }
+                });
+
+                lawyersViewModel.getLawyerData();
             }
         });
         connectedBtn.setOnClickListener(new View.OnClickListener() {
