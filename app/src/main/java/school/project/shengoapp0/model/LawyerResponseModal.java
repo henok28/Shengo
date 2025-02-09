@@ -6,7 +6,12 @@ import java.time.LocalDateTime;
 
 public class LawyerResponseModal {
     private String id;
-    private String userId;
+    private String user_id;
+
+    public String getUserId() {
+        return user_id;
+    }
+
     @SerializedName("first_name")
     private String firstName;
     @SerializedName("last_name")

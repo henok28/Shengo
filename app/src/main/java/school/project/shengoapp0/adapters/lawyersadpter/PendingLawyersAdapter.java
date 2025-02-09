@@ -1,0 +1,80 @@
+package school.project.shengoapp0.adapters.lawyersadpter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+
+import school.project.shengoapp0.R;
+import school.project.shengoapp0.model.LawyerToClientRequestModal;
+import school.project.shengoapp0.model.PendingLawyer;
+
+public class PendingLawyersAdapter extends RecyclerView.Adapter<PendingLawyersAdapter.PendingLawyerViewHolder> {
+
+
+    private final Context context;
+    private List<LawyerToClientRequestModal> lawyerToClientRequestModalList;
+
+    public void setLawyerToClientRequestModalList(List<LawyerToClientRequestModal> lawyerToClientRequestModalList) {
+        this.lawyerToClientRequestModalList = lawyerToClientRequestModalList;
+    }
+
+    public PendingLawyersAdapter(Context context, List<LawyerToClientRequestModal> lawyerToClientRequestModalList) {
+        this.context = context;
+        this.lawyerToClientRequestModalList = lawyerToClientRequestModalList;
+    }
+
+    @NonNull
+    @Override
+    public PendingLawyerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.pending_lawyer, parent, false);
+        return new PendingLawyerViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull PendingLawyerViewHolder holder, int position) {
+        LawyerToClientRequestModal pendingLawyer = lawyerToClientRequestModalList.get(position);
+//        holder
+    }
+
+    @Override
+    public int getItemCount() {
+        return lawyerToClientRequestModalList.size();
+    }
+
+
+    public static class PendingLawyerViewHolder extends RecyclerView.ViewHolder {
+        private final TextView pendingLawyerName;
+        private final ImageView pendingLawyerProfile;
+
+
+        public PendingLawyerViewHolder(@NonNull View itemView) {
+            super(itemView);
+            pendingLawyerName = itemView.findViewById(R.id.pending_lawyer_name);
+            pendingLawyerProfile = itemView.findViewById(R.id.pending_lawyer_profilePicture);
+
+        }
+
+        public void bind(PendingLawyer pendingLawyer, int position, Context context) {
+            pendingLawyerName.setText(pendingLawyer.getLawyer_profile().getFirst_name());
+            String baseurl = context.getString(R.string.base_url);
+            String imageUrl = baseurl + "/storage/" + pendingLawyer.getLawyer_profile().getProfile_picture();
+
+            Glide.with(context)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.ic_launcher_background) // Optional placeholder
+                    .error(R.drawable.ic_launcher_background)       // Optional error image
+                    .into(pendingLawyerProfile);
+        }
+
+    }
+}

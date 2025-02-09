@@ -85,12 +85,15 @@ public class SubscriptionRepo {
                 if (response.body() != null){
                     AuthCustomResponseModal subscription = response.body();
                     if (response.isSuccessful()){
-                        String status = subscription.getStatus();
-                        if (status.equals("subscribed")){
-                            authStatUtil.setSubscriptionStatus(status);
-                            subscriptionStatus.setValue(status);
+                        if (subscription.getStatus()!=null){
+                            String status = subscription.getStatus();
+                            if (status.equals("subscribed")){
+                                authStatUtil.setSubscriptionStatus(status);
+                                subscriptionStatus.setValue(status);
 
+                            }
                         }
+
                     }
                 }
             }

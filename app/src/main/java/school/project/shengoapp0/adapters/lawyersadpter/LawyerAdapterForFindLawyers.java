@@ -87,11 +87,16 @@ public class LawyerAdapterForFindLawyers extends RecyclerView.Adapter<LawyerAdap
         public void bind(LawyerModal lawyer, OnItemClickListener listener, int position, Context context) {
             //Remove the view id for the arrow because it is not used any more.
             // lawyerImage.setImageResource(lawyer.getProfileImage());
+
+
             lawyerName.setText(lawyer.getName());
             lawyerSpeciality.setText(lawyer.getSpecialty());
+            String baseurl = context.getString(R.string.base_url);
+            String imageUrl = baseurl+"/storage/"+lawyer.getProfilePictureUrl();
+
 
             Glide.with(context)
-                    .load(lawyer.getProfilePictureUrl())
+                    .load(imageUrl)
                     .placeholder(R.drawable.ic_launcher_background) // Optional placeholder
                     .error(R.drawable.ic_launcher_background)       // Optional error image
                     .into(profilePicture);

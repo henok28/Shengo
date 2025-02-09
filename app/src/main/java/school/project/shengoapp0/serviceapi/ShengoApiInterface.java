@@ -12,8 +12,11 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import school.project.shengoapp0.model.AuthCustomResponseModal;
 import school.project.shengoapp0.model.LawyerResponseModal;
+import school.project.shengoapp0.model.LawyerToClientRequestModal;
+import school.project.shengoapp0.model.PendingLawyer;
 import school.project.shengoapp0.model.ProfileModal;
 import school.project.shengoapp0.model.ResourceModal;
 import school.project.shengoapp0.model.SubscriptionRequestObj;
@@ -42,7 +45,7 @@ public interface ShengoApiInterface {
 
 
     @Headers("Accept: application/json")
-    @GET("api/client/resources")
+    @GET("api/client/profile")
     Call<ProfileModal>
     getProfile(
             @Header("Authorization")
@@ -75,10 +78,33 @@ public interface ShengoApiInterface {
 
 
     @Headers("Accept: application/json")
-    @GET("api/client/statusreturn")
+    @GET("api/client/getSubscriptionStatus")
     Call<AuthCustomResponseModal> getSubscriptionStatus(@Header("Authorization")String token);
 
     @Headers("Accept: application/json")
     @GET("api/client/find_lawyer")
     Call<List<LawyerResponseModal>> getLawyers(@Header("Authorization")String token);
+
+
+    //client send requeest to lawyer
+    @Headers("Accept: application/json")
+    @POST("api/client/lawyer/{lawyerId}/request")
+    Call<LawyerToClientRequestModal> sendLawyerRequest(
+            @Header("Authorization") String authorization,
+            @Path("lawyerId") String lawyerId,
+            @Body LawyerToClientRequestModal lawyerRequest // Changed to @Body and LawyerRequest
+    );
+
+    @Headers("Accept: application/json")
+    @GET("api/client/pending_lawyers")
+    Call<List<PendingLawyer>> fetchPendingLawyers(
+            @Header("Authorization") String authorization
+    );@Headers("Accept: application/json")
+
+
+    @GET("api/client/connected_lawyers")
+    Call<List<PendingLawyer>> fetchConnectedLawyers(
+            @Header("Authorization") String authorization
+    );
+
 }

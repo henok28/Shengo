@@ -137,6 +137,31 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MainActivity", "Fragment swapped.");
     }
 
+    public void swapFragment(Fragment fragment) {
+        Log.d("MainActivity", "Swapping fragments...");
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameLayout, fragment);
+
+        // Only add to back stack if it's not the dashboard or base fragment
+        transaction.commit();
+        Log.d("MainActivity", "Fragment swapped.");
+    }
+
+    public void logout() {
+        SharedPreferences sharedPreferences = getSharedPreferences("FormStatus", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("hasSubmittedForm", false);
+        editor.apply();
+        SharedPreferences sharedPreferences2 = getSharedPreferences("SubscriptionStatus", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+        editor2.putBoolean("hasSubscribed", false);
+        editor2.commit();
+        school.project.shengoapp0.utilities.TokenUtil tokenUtil = new school.project.shengoapp0.utilities.TokenUtil(this);
+        tokenUtil.clearToken();
+        swapFragments(new Login());
+    }
+
     public void swapFragments(Fragment fragment, String tag) {
         Log.d("MainActivity", "Swapping fragments...");
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

@@ -17,16 +17,16 @@
         android:layout_marginBottom="16dp">
 
         <ImageView
+            android:id="@+id/user_profile_pic"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/profile"
+
             android:contentDescription="Profile Picture"/>
 
         <TextView
             android:id="@+id/header_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Saron Mulugeta"
             android:textSize="25sp"
             android:textStyle="bold"
             android:fontFamily="@font/noto_sans"
@@ -105,9 +105,7 @@
                         android:id="@+id/verification_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Verified"
-
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         android:fontFamily="@font/noto_sans"
                         android:textColor="@color/black" />
 
@@ -148,6 +146,7 @@
                     android:layout_marginTop="10dp"
                     >
                     <ImageView
+                        android:id="@+id/sidebar_icon"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="8dp"
@@ -158,8 +157,8 @@
                         android:id="@+id/subsciption_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Active"
-                        android:textSize="15sp"
+
+                        android:textSize="14sp"
                         android:fontFamily="@font/noto_sans"
                         android:textColor="@color/black"
                          />
@@ -314,6 +313,7 @@
                         android:textColor="#777777"/>
                 </LinearLayout>
                 <ImageView
+                    android:id="@+id/navigate_to_settings"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/right_arrow"

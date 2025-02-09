@@ -3,7 +3,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
-    //Api Endpoints
+    //BaseURL
+    <string name="base_url" translatable="false">http://192.168.186.196:8000</string>
 
 
     //Headers
