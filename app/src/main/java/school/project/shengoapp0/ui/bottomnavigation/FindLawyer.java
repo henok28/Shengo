@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -32,10 +33,13 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import school.project.shengoapp0.R;
+import school.project.shengoapp0.adapters.lawyersadpter.ConnectedLawyersAdapter;
 import school.project.shengoapp0.adapters.lawyersadpter.LawyerAdapterForFindLawyers;
+import school.project.shengoapp0.adapters.lawyersadpter.PendingLawyersAdapter;
 import school.project.shengoapp0.model.LawyerModal;
-import school.project.shengoapp0.model.connectedlawyersmodal.ConnectedLawyer;
+import school.project.shengoapp0.model.PendingConnecedLawyerModal;
 import school.project.shengoapp0.viewmodels.ConnectedLawyersViewModel;
 import school.project.shengoapp0.viewmodels.LawyersViewModel;
 import school.project.shengoapp0.viewmodels.PendingLawyersViewModel;
@@ -71,24 +75,9 @@ public class FindLawyer extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = view.findViewById(R.id.lawyerRecyclerView);
 
-
-//        List<LawyerModal> lawyerList = new ArrayList<>();
-//        lawyerList.add(new LawyerModal("Ellis Andrews", "Criminal Defense Lawyer", R.drawable.person_1));
-//        lawyerList.add(new LawyerModal("Christy Barnes", "Finance & Securities Lawyer", R.drawable.person_2));
-//        lawyerList.add(new LawyerModal("Ramon Ward", "Tax Lawyer", R.drawable.person_3));
-//        lawyerList.add(new LawyerModal("Irvin Johnson", "Corporate Lawyer", R.drawable.person_4));
-//        lawyerList.add(new LawyerModal("Henok Girma", "Criminal Defense Lawyer", R.drawable.person_5));
-//        lawyerList.add(new LawyerModal("Brook Abera", "Criminal Defense Lawyer", R.drawable.person_1));
-//        lawyerList.add(new LawyerModal("Christy Barnes", "Finance & Securities Lawyer", R.drawable.person_2));
-//        lawyerList.add(new LawyerModal("Ramon Ward", "Tax Lawyer", R.drawable.person_3));
-//        lawyerList.add(new LawyerModal("Irvin Johnson", "Corporate Lawyer", R.drawable.person_4));
-//        lawyerList.add(new LawyerModal("Brook Abera", "Criminal Defense Lawyer", R.drawable.person_5));
-
         lawyerBtn = view.findViewById(R.id.lawyers_button);
         requestBtn = view.findViewById(R.id.requested_button);
         connectedBtn = view.findViewById(R.id.connected_button);
-
-
 
 
         // Step 3: Set up the RecyclerView layout manager
@@ -96,13 +85,11 @@ public class FindLawyer extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         LawyerAdapterForFindLawyers adapter = new LawyerAdapterForFindLawyers(getContext(), new ArrayList<>(), (lawyerModal, position) -> {
-            // Handle item click - you can implement this later or leave it empty for now
-//            Toast.makeText(requireContext(), "Clicked: " + lawyerModal.getName(), Toast.LENGTH_SHORT).show();
             showCustomPopup(lawyerModal);
         });
+        PendingLawyersAdapter adapter2 = new PendingLawyersAdapter(getContext(), new ArrayList<>());
+        ConnectedLawyersAdapter adapter3 = new ConnectedLawyersAdapter(getContext(), new ArrayList<>());
 //        recyclerView.setAdapter(adapter);
-
-
 
 
         pendingLawyersViewModel = new ViewModelProvider(this).get(PendingLawyersViewModel.class);
@@ -111,14 +98,16 @@ public class FindLawyer extends Fragment {
 
         lawyersViewModel = new ViewModelProvider(this).get(LawyersViewModel.class);
         connectedLawyersViewModel = new ViewModelProvider(this).get(ConnectedLawyersViewModel.class);
+        setSelectedButton(lawyerBtn);
         lawyerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setSelectedButton(lawyerBtn);
                 lawyersViewModel.getLawyerData();
                 lawyersViewModel.getLawyer().observe(getViewLifecycleOwner(), new Observer<List<LawyerModal>>() {
                     @Override
                     public void onChanged(List<LawyerModal> lawyerModals) {
-                        if (lawyerModals!=null){
+                        if (lawyerModals != null) {
                             adapter.setLawyers(lawyerModals);
                             recyclerView.setAdapter(adapter);
                         }
@@ -132,29 +121,53 @@ public class FindLawyer extends Fragment {
         requestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pendingLawyersViewModel.getPendingLawyerData();
-                pendingLawyersViewModel.getPendingLawyerData().observe(getViewLifecycleOwner(), new Observer<List<ConnectedLawyer>>() {
+                setSelectedButton(requestBtn);
+                pendingLawyersViewModel.fetchPendingLawyers();
+                pendingLawyersViewModel.getPendingMutableLawyer().observe(getViewLifecycleOwner(), new Observer<List<PendingConnecedLawyerModal>>() {
                     @Override
-                    public void onChanged(List<ConnectedLawyer> connectedLawyers) {
-                        if (connectedLawyers!=null){
-                            adapter.setLawyers(connectedLawyers);
-                        }
+                    public void onChanged(List<PendingConnecedLawyerModal> pendingLawyers) {
+                        adapter2.setPendingLawyers(pendingLawyers);
+                        recyclerView.setAdapter(adapter2);
                     }
                 });
 
-                lawyersViewModel.getLawyerData();
+
             }
         });
+
         connectedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setSelectedButton(connectedBtn);
                 connectedLawyersViewModel.fetchConnectedLawyers();
+                connectedLawyersViewModel.getMutableConnectedData().observe(getViewLifecycleOwner(), new Observer<List<PendingConnecedLawyerModal>>() {
+                    @Override
+                    public void onChanged(List<PendingConnecedLawyerModal> connectedLawyers) {
+                        adapter3.setConnectedLawyerResponseModals(connectedLawyers);
+                        recyclerView.setAdapter(adapter3);
+                    }
+                });
             }
         });
-
-
-
     }
+
+
+    private void setSelectedButton(Button selectedButton) {
+        // Reset all buttons to the default state
+        resetButton(lawyerBtn);
+        resetButton(requestBtn);
+        resetButton(connectedBtn);
+
+        // Set the selected button to the highlighted state
+        selectedButton.setBackgroundColor(Color.BLACK);
+        selectedButton.setTextColor(Color.WHITE);
+    }
+
+    private void resetButton(Button button) {
+        button.setBackgroundColor(Color.TRANSPARENT); // Or your default background color
+        button.setTextColor(Color.BLACK); // Or your default text color
+    }
+
     public void setUserId(String userId) {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -167,6 +180,7 @@ public class FindLawyer extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_USER_ID, null);
     }
+
     private void showCustomPopup(LawyerModal lawyer) {
         // Get the root view of the fragment
         final ViewGroup root = (ViewGroup) requireActivity().getWindow().getDecorView().findViewById(android.R.id.content);
@@ -207,12 +221,10 @@ public class FindLawyer extends Fragment {
         lawyerPhone.setText(lawyer.getPhone());
         lawyerCity.setText(lawyer.getCity());
         lawyerAddress.setText(lawyer.getAddress());
-        lawyersYearsOfExp.setText("Experience: "+lawyer.getYearsOfExperiance());
-        Log.d("Find Lawyer!!", lawyer.getName()+" "+lawyer.getUser_id());
+        lawyersYearsOfExp.setText("Experience: " + lawyer.getYearsOfExperiance());
+        Log.d("Find Lawyer!!", lawyer.getName() + " " + lawyer.getUser_id());
         setUserId(lawyer.getUser_id());
         loadProfileImage(lawyer.getProfilePictureUrl());
-
-
 
 
         EditText popupDescription = popupView.findViewById(R.id.popupDescription);
@@ -238,7 +250,6 @@ public class FindLawyer extends Fragment {
         });
 
 
-
         // Set popup content dynamically based on the clicked lawyer
 
         // Create a PopupWindow
@@ -261,11 +272,7 @@ public class FindLawyer extends Fragment {
 
         // Set up click listeners
         cancelButton.setOnClickListener(v -> dismissPopup());
-//        sendButton.setOnClickListener(v -> {
-//            // Handle send button action, dismiss popup
-//            Toast.makeText(requireContext(), "Details sent for " + lawyer.getName(), Toast.LENGTH_SHORT).show();
-//            dismissPopup();
-//        });
+
 
         // Show the popup
         if (getActivity() != null) {
@@ -288,17 +295,15 @@ public class FindLawyer extends Fragment {
                 .setDuration(200)
                 .setListener(null);
 
-        // We no longer need this as setOnDismissListener handles outside touches
-        // popupWindow.getContentView().setOnTouchListener((v, event) -> {
-        //     return false;
-        // });
-
-        // We still need this to allow clicking on the dim view to dismiss
         dimView.setOnTouchListener((v, event) -> {
             dismissPopup();
             return true;
         });
+
     }
+
+    // We still need this to allow clicking on the dim view to dismiss
+
 
     private void dismissPopup() {
         if (popupWindow != null && popupWindow.isShowing()) {
@@ -320,6 +325,7 @@ public class FindLawyer extends Fragment {
                     });
         }
     }
+
 
     private void removeDimView() {
         if (dimView != null && dimView.getParent() != null) {
@@ -351,7 +357,7 @@ public class FindLawyer extends Fragment {
     private void loadProfileImage(String profilePicturePath) {
         if (profilePicturePath != null && !profilePicturePath.isEmpty()) {
             String baseUrl = getString(R.string.base_url);
-            String imageUrl = baseUrl+"/storage/"+profilePicturePath;
+            String imageUrl = baseUrl + "/storage/" + profilePicturePath;
 //            String imageUrl =  BASE_URL+ profilePicturePath; // Construct the full URL
             Log.d("Image", imageUrl);
             Glide.with(this) // or `getContext()` if `this` is not an Activity
@@ -367,4 +373,5 @@ public class FindLawyer extends Fragment {
             lawyersImage.setImageResource(R.drawable.ic_launcher_background); // Replace with your default image
         }
     }
+
 }

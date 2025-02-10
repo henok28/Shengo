@@ -1,7 +1,7 @@
 package school.project.shengoapp0.model;
 
 // PendingLawyers.java
-public class PendingLawyer {
+public class PendingConnecedLawyerModal {
     private LawyerProfile Lawyer_profile; //Note the name, it has to be exactly the same as in the JSON
     private String status;
     private String description;

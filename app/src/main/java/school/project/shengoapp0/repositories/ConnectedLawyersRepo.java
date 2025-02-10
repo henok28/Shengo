@@ -10,8 +10,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import school.project.shengoapp0.model.PendingLawyer;
-import school.project.shengoapp0.model.connectedlawyersmodal.ConnectedLawyerResponseModal;
+import school.project.shengoapp0.model.PendingConnecedLawyerModal;
+import school.project.shengoapp0.model.connectedlawyersmodal.ConnectedLawyerModal;
 import school.project.shengoapp0.serviceapi.RetrofitInstance;
 import school.project.shengoapp0.serviceapi.ShengoApiInterface;
 import school.project.shengoapp0.utilities.TokenUtil;
@@ -19,9 +19,9 @@ import school.project.shengoapp0.utilities.TokenUtil;
 public class ConnectedLawyersRepo {
     private Context context;
     private ShengoApiInterface shengoApiInterface;
-    MutableLiveData<List<PendingLawyer>> connectedLawyerResponse = new MutableLiveData<>();
+    MutableLiveData<List<PendingConnecedLawyerModal>> connectedLawyerResponse = new MutableLiveData<>();
 
-    public MutableLiveData<List<PendingLawyer>> getConnectedLawyerResponse() {
+    public MutableLiveData<List<PendingConnecedLawyerModal>> getConnectedLawyerResponse() {
         return connectedLawyerResponse;
     }
 
@@ -34,23 +34,24 @@ public class ConnectedLawyersRepo {
     }
 
     public void fetchConnectedLawyers(){
-        Call<List<PendingLawyer>> call = shengoApiInterface.fetchConnectedLawyers(tokenUtil.getToken());
-
-        call.enqueue(new Callback<List<PendingLawyer>>() {
+        Call<List<PendingConnecedLawyerModal>> call = shengoApiInterface.fetchConnectedLawyers(tokenUtil.getToken());
+        call.enqueue(new Callback<List<PendingConnecedLawyerModal>>() {
             @Override
-            public void onResponse(Call<List<PendingLawyer>> call, Response<List<PendingLawyer>> response) {
+            public void onResponse(Call<List<PendingConnecedLawyerModal>> call, Response<List<PendingConnecedLawyerModal>> response) {
                 if (response.isSuccessful() && response.body()!=null){
-                    List<PendingLawyer> connectedLawyers = response.body();
+                    List<PendingConnecedLawyerModal> connectedLawyerModal = response.body();
+                    connectedLawyerResponse.setValue(connectedLawyerModal);
+                    Log.d("ConnectedLawyer", connectedLawyerModal.get(0).getLawyer_profile().getFirst_name());
 
-                    Log.d("ConnectedLawyers", connectedLawyers.toString());
-                    connectedLawyerResponse.setValue(connectedLawyers);
                 }
             }
 
             @Override
-            public void onFailure(Call<List<PendingLawyer>> call, Throwable throwable) {
+            public void onFailure(Call<List<PendingConnecedLawyerModal>> call, Throwable throwable) {
 
             }
         });
+
+
     }
 }

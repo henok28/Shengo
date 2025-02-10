@@ -15,18 +15,19 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import school.project.shengoapp0.R;
+import school.project.shengoapp0.model.PendingConnecedLawyerModal;
 import school.project.shengoapp0.model.connectedlawyersmodal.ConnectedLawyerModal;
 import school.project.shengoapp0.model.connectedlawyersmodal.ConnectedLawyerResponseModal;
 
 public class ConnectedLawyersAdapter extends RecyclerView.Adapter<ConnectedLawyersAdapter.ConnectedLawyerViewHolder>{
     private final Context context;
-    private List<ConnectedLawyerResponseModal> connectedLawyerResponseModals;
+    private List<PendingConnecedLawyerModal> connectedLawyerResponseModals;
 
-    public void setConnectedLawyerResponseModals(List<ConnectedLawyerResponseModal> connectedLawyerResponseModals) {
+    public void setConnectedLawyerResponseModals(List<PendingConnecedLawyerModal> connectedLawyerResponseModals) {
         this.connectedLawyerResponseModals = connectedLawyerResponseModals;
     }
 
-    public ConnectedLawyersAdapter(Context context, List<ConnectedLawyerResponseModal> connectedLawyerResponseModals) {
+    public ConnectedLawyersAdapter(Context context, List<PendingConnecedLawyerModal> connectedLawyerResponseModals) {
         this.context = context;
         this.connectedLawyerResponseModals = connectedLawyerResponseModals;
     }
@@ -40,8 +41,8 @@ public class ConnectedLawyersAdapter extends RecyclerView.Adapter<ConnectedLawye
 
     @Override
     public void onBindViewHolder(@NonNull ConnectedLawyerViewHolder holder, int position) {
-        ConnectedLawyerResponseModal connectedLawyers = connectedLawyerResponseModals.get(position);
-        //holder
+        PendingConnecedLawyerModal connectedLawyers = connectedLawyerResponseModals.get(position);
+        holder.bind(connectedLawyers, context);
     }
 
     @Override
@@ -60,10 +61,10 @@ public class ConnectedLawyersAdapter extends RecyclerView.Adapter<ConnectedLawye
             connectedLawyerProfile = itemView.findViewById(R.id.connected_lawyer_profile);
         }
 
-        public void bind(ConnectedLawyerModal connectedLawyerModal, int position, Context context){
-            connectedLawyerName.setText(connectedLawyerModal.getClient_profile().getFirst_name()+" "+connectedLawyerModal.getClient_profile().getMiddle_name());
+        public void bind(PendingConnecedLawyerModal connectedLawyerModal, Context context){
+            connectedLawyerName.setText(connectedLawyerModal.getLawyer_profile().getFirst_name()+" "+connectedLawyerModal.getLawyer_profile().getMiddle_name());
             String baseurl = context.getString(R.string.base_url);
-            String imageUrl = baseurl+"/storage/"+connectedLawyerModal.getClient_profile().getProfile_picture();
+            String imageUrl = baseurl+"/storage/"+connectedLawyerModal.getLawyer_profile().getProfile_picture();
 
             Glide.with(context)
                     .load(imageUrl)

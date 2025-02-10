@@ -16,12 +16,13 @@ import retrofit2.http.Path;
 import school.project.shengoapp0.model.AuthCustomResponseModal;
 import school.project.shengoapp0.model.LawyerResponseModal;
 import school.project.shengoapp0.model.LawyerToClientRequestModal;
-import school.project.shengoapp0.model.PendingLawyer;
+import school.project.shengoapp0.model.PendingConnecedLawyerModal;
 import school.project.shengoapp0.model.ProfileModal;
 import school.project.shengoapp0.model.ResourceModal;
 import school.project.shengoapp0.model.SubscriptionRequestObj;
 import school.project.shengoapp0.model.UsersAutModal;
 import school.project.shengoapp0.model.VerificationFormModal;
+import school.project.shengoapp0.model.connectedlawyersmodal.ConnectedLawyerModal;
 import school.project.shengoapp0.model.modelforsubscription.SubscriptionResponse;
 
 public interface ShengoApiInterface {
@@ -97,13 +98,13 @@ public interface ShengoApiInterface {
 
     @Headers("Accept: application/json")
     @GET("api/client/pending_lawyers")
-    Call<List<PendingLawyer>> fetchPendingLawyers(
+    Call<List<PendingConnecedLawyerModal>> fetchPendingLawyers(
             @Header("Authorization") String authorization
     );@Headers("Accept: application/json")
 
 
     @GET("api/client/connected_lawyers")
-    Call<List<PendingLawyer>> fetchConnectedLawyers(
+    Call<List<PendingConnecedLawyerModal>> fetchConnectedLawyers(
             @Header("Authorization") String authorization
     );
 

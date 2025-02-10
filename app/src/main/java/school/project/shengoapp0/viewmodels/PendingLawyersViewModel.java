@@ -8,8 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import school.project.shengoapp0.model.PendingLawyer;
-import school.project.shengoapp0.model.connectedlawyersmodal.ConnectedLawyer;
+import school.project.shengoapp0.model.PendingConnecedLawyerModal;
 import school.project.shengoapp0.repositories.PendingLawyerRepo;
 
 public class PendingLawyersViewModel extends AndroidViewModel {
@@ -23,7 +22,7 @@ public class PendingLawyersViewModel extends AndroidViewModel {
     public void fetchPendingLawyers(){
         pendingLawyerRepo.fetchPendingLawyers();
     }
-    public MutableLiveData<List<ConnectedLawyer>> getPendingLawyerData(){
-        return pendingLawyerRepo.getLawyerDataResponse();
+    public MutableLiveData<List<PendingConnecedLawyerModal>> getPendingMutableLawyer(){
+        return pendingLawyerRepo.getMutablePendingLawyer();
     }
 }

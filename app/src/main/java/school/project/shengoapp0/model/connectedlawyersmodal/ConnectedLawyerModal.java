@@ -5,7 +5,7 @@ public class ConnectedLawyerModal {
     private String request_id;
     private String description;
     private String status;
-    private ClientProfile client_profile;
+    private ClientProfile Lawyer_profile;
     private String updated_at;
 
     // Getters and setters
@@ -34,11 +34,11 @@ public class ConnectedLawyerModal {
     }
 
     public ClientProfile getClient_profile() {
-        return client_profile;
+        return Lawyer_profile;
     }
 
     public void setClient_profile(ClientProfile client_profile) {
-        this.client_profile = client_profile;
+        this.Lawyer_profile = client_profile;
     }
 
     public String getUpdated_at() {
@@ -55,7 +55,7 @@ public class ConnectedLawyerModal {
                 "request_id='" + request_id + '\'' +
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
-                ", client_profile=" + client_profile +
+                ", client_profile=" + Lawyer_profile +
                 ", updated_at='" + updated_at + '\'' +
                 '}';
     }

@@ -16,21 +16,21 @@ import java.util.List;
 
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.model.LawyerToClientRequestModal;
-import school.project.shengoapp0.model.PendingLawyer;
+import school.project.shengoapp0.model.PendingConnecedLawyerModal;
 
 public class PendingLawyersAdapter extends RecyclerView.Adapter<PendingLawyersAdapter.PendingLawyerViewHolder> {
 
 
     private final Context context;
-    private List<LawyerToClientRequestModal> lawyerToClientRequestModalList;
+    private List<PendingConnecedLawyerModal> pendingLawyers;
 
-    public void setLawyerToClientRequestModalList(List<LawyerToClientRequestModal> lawyerToClientRequestModalList) {
-        this.lawyerToClientRequestModalList = lawyerToClientRequestModalList;
+    public void setPendingLawyers(List<PendingConnecedLawyerModal> pendingLawyers) {
+        this.pendingLawyers = pendingLawyers;
     }
 
-    public PendingLawyersAdapter(Context context, List<LawyerToClientRequestModal> lawyerToClientRequestModalList) {
+    public PendingLawyersAdapter(Context context, List<PendingConnecedLawyerModal> pendingLawyers) {
         this.context = context;
-        this.lawyerToClientRequestModalList = lawyerToClientRequestModalList;
+        this.pendingLawyers = pendingLawyers;
     }
 
     @NonNull
@@ -42,13 +42,13 @@ public class PendingLawyersAdapter extends RecyclerView.Adapter<PendingLawyersAd
 
     @Override
     public void onBindViewHolder(@NonNull PendingLawyerViewHolder holder, int position) {
-        LawyerToClientRequestModal pendingLawyer = lawyerToClientRequestModalList.get(position);
-//        holder
+        PendingConnecedLawyerModal pendingLawyer = pendingLawyers.get(position);
+        holder.bind(pendingLawyer, context);
     }
 
     @Override
     public int getItemCount() {
-        return lawyerToClientRequestModalList.size();
+        return pendingLawyers.size();
     }
 
 
@@ -64,8 +64,8 @@ public class PendingLawyersAdapter extends RecyclerView.Adapter<PendingLawyersAd
 
         }
 
-        public void bind(PendingLawyer pendingLawyer, int position, Context context) {
-            pendingLawyerName.setText(pendingLawyer.getLawyer_profile().getFirst_name());
+        public void bind(PendingConnecedLawyerModal pendingLawyer, Context context) {
+            pendingLawyerName.setText(pendingLawyer.getLawyer_profile().getFirst_name() + " "+pendingLawyer.getLawyer_profile().getMiddle_name());
             String baseurl = context.getString(R.string.base_url);
             String imageUrl = baseurl + "/storage/" + pendingLawyer.getLawyer_profile().getProfile_picture();
 
