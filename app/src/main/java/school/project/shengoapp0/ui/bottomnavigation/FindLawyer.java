@@ -125,9 +125,16 @@ public class FindLawyer extends Fragment {
                 pendingLawyersViewModel.fetchPendingLawyers();
                 pendingLawyersViewModel.getPendingMutableLawyer().observe(getViewLifecycleOwner(), new Observer<List<PendingConnecedLawyerModal>>() {
                     @Override
+<<<<<<< HEAD
                     public void onChanged(List<PendingConnecedLawyerModal> pendingLawyers) {
                         adapter2.setPendingLawyers(pendingLawyers);
                         recyclerView.setAdapter(adapter2);
+=======
+                    public void onChanged(List<ConnectedLawyer> connectedLawyers) {
+                        if (connectedLawyers!=null){
+//                            adapter.setLawyers(connectedLawyers);
+                        }
+>>>>>>> b07ce6515222bea46957384fc79eb6a0b1ac3043
                     }
                 });
 
