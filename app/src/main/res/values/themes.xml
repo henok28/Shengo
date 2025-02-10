@@ -16,4 +16,23 @@
     <style name="CustomTextTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:textColor">@color/black</item> <!-- Set your desired color -->
     </style>
+
+    <!-- Base application theme -->
+    <style name="Base.Theme.ResetPassword" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <!-- Main Theme -->
+    <style name="Theme.ResetPassword" parent="Base.Theme.ResetPassword" />
+
+    <!-- Define Custom Shape Appearance for Button -->
+    <style name="ShapeAppearance.CustomButton" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">4dp</item>  <!-- Adjust this for less rounding -->
+    </style>
+    <!-- Custom Button Style Applying the Custom Shape -->
+    <style name="CustomButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="shapeAppearance">@style/ShapeAppearance.CustomButton</item>
+    </style>
+
 </resources>
