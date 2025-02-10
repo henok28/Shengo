@@ -137,7 +137,7 @@ public class FindLawyer extends Fragment {
                     @Override
                     public void onChanged(List<ConnectedLawyer> connectedLawyers) {
                         if (connectedLawyers!=null){
-                            adapter.setLawyers(connectedLawyers);
+//                            adapter.setLawyers(connectedLawyers);
                         }
                     }
                 });
