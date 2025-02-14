@@ -9,7 +9,7 @@ public class TokenUtil {
     private static final String PREF_NAME = "AppPrefs";
     private static final String TOKEN_KEY = "TOKEN";
     private static final String TIMESTAMP_KEY = "TOKEN_TIMESTAMP";
-    private static final long EXPIRATION_TIME = 60 * 60 * 1000;
+    private static final long EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
     private SharedPreferences sharedPreferences;
     private Context context;

@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -25,6 +26,8 @@ import school.project.shengoapp0.MainActivity;
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.ui.autentication.Login;
 import school.project.shengoapp0.ui.autentication.VerificationForm;
+import school.project.shengoapp0.ui.others.FeedbackActivity;
+import school.project.shengoapp0.ui.others.MapActivity;
 import school.project.shengoapp0.ui.others.SuccessSubscriptionPage;
 import school.project.shengoapp0.ui.others.VerificationState;
 import school.project.shengoapp0.utilities.AuthStatUtil;
@@ -51,6 +54,17 @@ public class Settings extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button upgradeBtn = view.findViewById(R.id.upgrade);
+
+        RelativeLayout feedbackLayout = view.findViewById(R.id.feedback);
+        feedbackLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(getContext(), FeedbackActivity.class);
+//                // Start the activity
+//                startActivity(intent);
+            }
+        });
+
 
 
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("FormStatus", Context.MODE_PRIVATE);

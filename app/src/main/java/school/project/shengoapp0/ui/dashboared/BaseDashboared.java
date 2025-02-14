@@ -77,6 +77,7 @@ public class BaseDashboared extends Fragment {
 
         if (!isUserSubscribed){
             bottom_navigation.getMenu().removeItem(R.id.navigation_message);
+            bottom_navigation.getMenu().removeItem(R.id.navigation_lawyer);
         }
         bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

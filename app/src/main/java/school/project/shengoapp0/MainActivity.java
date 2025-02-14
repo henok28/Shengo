@@ -26,6 +26,7 @@ import java.util.Locale;
 import school.project.shengoapp0.ui.autentication.Login;
 import school.project.shengoapp0.ui.autentication.Signup;
 import school.project.shengoapp0.ui.bottomnavigation.Home;
+import school.project.shengoapp0.ui.bottomnavigation.Settings;
 import school.project.shengoapp0.ui.dashboared.BaseDashboared;
 import school.project.shengoapp0.ui.onboaredpage.BaseFragment;
 import school.project.shengoapp0.ui.others.SuccessSubscriptionPage;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 //        mimicDataBaseFormResponse("APPROVED");
         FormUtils formUtils = new FormUtils(this);
         formUtils.clear();
-        formUtils.setFormState("APPROVED");
+        formUtils.setFormState("PENDING");
         Log.d("value of form state", "onCreate: " + formUtils.getFormState());
 
 
@@ -200,9 +201,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (hasBeenRemovedFromStack == false) {
             if (currentFragment instanceof VerificationState && (hasSubmittedForm||authStatUtil.getVerificationStatus())) {
-                fragmentManager.popBackStack("VerificationForm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                editor.putBoolean("hasBeenRemovedFromStack  ", true);
-                editor.commit();
+//                fragmentManager.popBackStack("VerificationForm", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//                editor.putBoolean("hasBeenRemovedFromStack  ", true);
+//                editor.commit();
+                swapFragment(new BaseDashboared());
                 return;
             }
         }
@@ -219,10 +221,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (hasBeenRemovedFromStackSubscription == false){
             if (currentFragment instanceof SuccessSubscriptionPage && (hasSubscribed || authStatUtil.getSubscriptionStatus())) {
-                fragmentManager.popBackStack("Subscription", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                fragmentManager.popBackStack("VerificationState", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                editor.putBoolean("hasBeenRemovedFromStackSubscription", true);
-                editor.commit();
+//                fragmentManager.popBackStack("Subscription", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//                fragmentManager.popBackStack("VerificationState", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//                editor.putBoolean("hasBeenRemovedFromStackSubscription", true);
+//                editor.commit();
+                swapFragment(new BaseDashboared());
+
                 Log.d("in", " " + hasBeenRemovedFromStackSubscription);
                 return;
 

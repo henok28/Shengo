@@ -23,11 +23,11 @@ public class AuthViewModel extends AndroidViewModel {
     public void sendLoginRequest(String email, String password){
         authRepository.SendLoginRequest(email, password);
     }
-    public MutableLiveData<String> getSignupToken(){
-        return authRepository.getSignupToken();
+    public MutableLiveData<String> getSignUpSuccessMsg(){
+        return authRepository.getSignUpSuccessStr();
     }
    public MutableLiveData<String> getSignupError(){
-        return authRepository.getSignupError();
+        return authRepository.getSignUpError();
    }
 
     public MutableLiveData<String> getLoginToken(){

@@ -1,35 +1,21 @@
 package school.project.shengoapp0.repositories;
 
-import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.net.SocketTimeoutException;
-import java.util.concurrent.TimeoutException;
 
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.ResponseBody;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import school.project.shengoapp0.model.AuthCustomResponseModal;
 import school.project.shengoapp0.model.UsersAutModal;
-import school.project.shengoapp0.retrofit.AuthService;
 import school.project.shengoapp0.serviceapi.RetrofitInstance;
 import school.project.shengoapp0.serviceapi.ShengoApiInterface;
 import school.project.shengoapp0.utilities.AuthStatUtil;
@@ -38,11 +24,10 @@ import school.project.shengoapp0.utilities.TokenUtil;
 public class AuthRepo {
     private int maxRetries = 2;
     private int retryDelayMillis = 2000;
-    private AuthService authService;
     ShengoApiInterface shengoApiInterface;
     private Context context;
-    MutableLiveData<String> signupToken = new MutableLiveData<>();
-    MutableLiveData<String> signupError = new MutableLiveData<>();
+    MutableLiveData<String> signUpSuccessStr = new MutableLiveData<>();
+    MutableLiveData<String> signUpError = new MutableLiveData<>();
 
 
     MutableLiveData<String> loginToken = new MutableLiveData<>();
@@ -57,20 +42,20 @@ public class AuthRepo {
     }
 
     public void setToken(MutableLiveData<String> token) {
-        this.signupToken = token;
+        this.signUpSuccessStr = token;
     }
 
     public void setError(MutableLiveData<String> error) {
-        this.signupError = error;
+        this.signUpError = error;
     }
 
 
-    public MutableLiveData<String> getSignupToken() {
-        return signupToken;
+    public MutableLiveData<String> getSignUpSuccessStr() {
+        return signUpSuccessStr;
     }
 
-    public MutableLiveData<String> getSignupError() {
-        return signupError;
+    public MutableLiveData<String> getSignUpError() {
+        return signUpError;
     }
     AuthStatUtil authStatUtil;
 
@@ -109,17 +94,17 @@ public class AuthRepo {
                 if (response.body() != null) {
                     AuthCustomResponseModal authResponse = response.body();
                     if (response.isSuccessful()) {
-                        String accessToken = authResponse.getAccess_token();
-                        signupToken.setValue(accessToken);
-                        Log.d("access_token", "onResponse: " + accessToken);
+                        String successMsg = authResponse.getMessage();
+                        signUpSuccessStr.setValue(successMsg);
+                        Log.d("access_token", "onResponse: " + successMsg);
                     }
 
                 } else if (response.errorBody() != null) {
                     Gson gson = new Gson();
                     try {
                         AuthCustomResponseModal errorResponse = gson.fromJson(response.errorBody().string(), AuthCustomResponseModal.class);
-                        String mes = errorResponse.getMessage();
-                        signupError.setValue(mes);
+                        String mes = errorResponse.getLoginError();
+                        signUpError.setValue(mes);
                         Log.d("Error Response", mes);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
@@ -150,11 +135,11 @@ public class AuthRepo {
                 }
                 makeSignupApiCall(usersAutModal, retryCount+1);
             }else{
-                signupError.setValue("Request timed out please try again");
+                signUpError.setValue("Request timed out please try again");
                 Log.d("Signup time out: " ,"Signup time out and surpasses the m");
             }
         }else{
-            signupError.setValue("An error occurred while making call to the server");
+            signUpError.setValue("An error occurred while making call to the server");
         }
     }
 
@@ -167,6 +152,7 @@ public class AuthRepo {
 
     }
 
+
     public void makeLoginApiCall(UsersAutModal usersAutModal, int retryCount) {
         Call<AuthCustomResponseModal> call = shengoApiInterface.Login(usersAutModal);
         call.enqueue(new Callback<AuthCustomResponseModal>() {
@@ -176,6 +162,12 @@ public class AuthRepo {
                     AuthCustomResponseModal loginResponse = response.body();
                     if (response.isSuccessful()) {
                         String access_token = loginResponse.getAccess_token();
+                        String userId = loginResponse.getUser().getId();
+                        SharedPreferences ID = context.getSharedPreferences("signuEmail", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = ID.edit();
+                        editor.putString("userid", userId.trim());
+                        editor.apply();
+                        Log.d("userId", userId);
                         authStatUtil.setVerificationStatus(loginResponse.getVerificationStatus());
                         authStatUtil.setSubscriptionStatus(loginResponse.getSubscriptionStatus());
                         TokenUtil tokenUtil = new TokenUtil(context);

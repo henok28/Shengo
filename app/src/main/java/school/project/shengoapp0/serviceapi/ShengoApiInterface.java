@@ -16,6 +16,8 @@ import retrofit2.http.Path;
 import school.project.shengoapp0.model.AuthCustomResponseModal;
 import school.project.shengoapp0.model.LawyerResponseModal;
 import school.project.shengoapp0.model.LawyerToClientRequestModal;
+import school.project.shengoapp0.model.NotificatoinResponseModal;
+import school.project.shengoapp0.model.OTPResponseModal;
 import school.project.shengoapp0.model.PendingConnecedLawyerModal;
 import school.project.shengoapp0.model.ProfileModal;
 import school.project.shengoapp0.model.ResourceModal;
@@ -24,6 +26,7 @@ import school.project.shengoapp0.model.UsersAutModal;
 import school.project.shengoapp0.model.VerificationFormModal;
 import school.project.shengoapp0.model.connectedlawyersmodal.ConnectedLawyerModal;
 import school.project.shengoapp0.model.modelforsubscription.SubscriptionResponse;
+import school.project.shengoapp0.ui.others.OTPModal;
 
 public interface ShengoApiInterface {
     @Headers("Accept: application/json")
@@ -100,12 +103,26 @@ public interface ShengoApiInterface {
     @GET("api/client/pending_lawyers")
     Call<List<PendingConnecedLawyerModal>> fetchPendingLawyers(
             @Header("Authorization") String authorization
-    );@Headers("Accept: application/json")
+    );
 
-
+    @Headers("Accept: application/json")
     @GET("api/client/connected_lawyers")
     Call<List<PendingConnecedLawyerModal>> fetchConnectedLawyers(
             @Header("Authorization") String authorization
     );
+
+
+    @Headers("Accept: application/json")
+    @POST("api/verify_otp")
+    Call<OTPResponseModal> sendOtp(@Body OTPModal otpRequest);
+
+
+    @Headers("Accept: application/json")
+    @GET("api/notifications/{userId}")
+    Call<List<NotificatoinResponseModal>> getNotifications(
+            @Header("Authorization") String authorization,
+            @Path("userId") String userId
+    );
+
 
 }

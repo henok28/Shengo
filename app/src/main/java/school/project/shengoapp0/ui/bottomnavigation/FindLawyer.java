@@ -99,6 +99,15 @@ public class FindLawyer extends Fragment {
         lawyersViewModel = new ViewModelProvider(this).get(LawyersViewModel.class);
         connectedLawyersViewModel = new ViewModelProvider(this).get(ConnectedLawyersViewModel.class);
         setSelectedButton(lawyerBtn);
+        lawyersViewModel.getLawyerData();
+        lawyersViewModel.getLawyer().observe(getViewLifecycleOwner(), new Observer<List<LawyerModal>>() {
+            @Override
+            public void onChanged(List<LawyerModal> lawyerModals) {
+                adapter.setLawyers(lawyerModals);
+                recyclerView.setAdapter(adapter);
+            }
+        });
+
         lawyerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,16 +134,9 @@ public class FindLawyer extends Fragment {
                 pendingLawyersViewModel.fetchPendingLawyers();
                 pendingLawyersViewModel.getPendingMutableLawyer().observe(getViewLifecycleOwner(), new Observer<List<PendingConnecedLawyerModal>>() {
                     @Override
-<<<<<<< HEAD
                     public void onChanged(List<PendingConnecedLawyerModal> pendingLawyers) {
                         adapter2.setPendingLawyers(pendingLawyers);
                         recyclerView.setAdapter(adapter2);
-=======
-                    public void onChanged(List<ConnectedLawyer> connectedLawyers) {
-                        if (connectedLawyers!=null){
-//                            adapter.setLawyers(connectedLawyers);
-                        }
->>>>>>> b07ce6515222bea46957384fc79eb6a0b1ac3043
                     }
                 });
 
@@ -382,3 +384,5 @@ public class FindLawyer extends Fragment {
     }
 
 }
+
+

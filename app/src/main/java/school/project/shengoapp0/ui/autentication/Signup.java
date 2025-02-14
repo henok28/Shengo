@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,13 +26,13 @@ import java.util.Locale;
 
 import school.project.shengoapp0.MainActivity;
 import school.project.shengoapp0.R;
-import school.project.shengoapp0.ui.dashboared.BaseDashboared;
+import school.project.shengoapp0.ui.others.OTP;
 import school.project.shengoapp0.viewmodels.AuthViewModel;
 
 
 public class Signup extends Fragment {
     Button sigupBtn;
-    EditText FirstName, MiddleName,LastName,Email,Password, ConfirmPassword;
+    EditText FirstName, MiddleName, LastName, Email, Password, ConfirmPassword;
     TextView textBtn;
     private AuthViewModel authViewModel;
     private ToggleButton languageToggleButton;
@@ -75,9 +76,13 @@ public class Signup extends Fragment {
                 String password = Password.getText().toString();
                 String confirmpassword = ConfirmPassword.getText().toString();
 
-                if (validateFields(fname, mname,lname, email, password, confirmpassword)){
+                if (validateFields(fname, mname, lname, email, password, confirmpassword)) {
+                    SharedPreferences signUpEmail = requireActivity().getSharedPreferences("signuEmail", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = signUpEmail.edit();
+                    editor.putString("Email", email.trim());
+                    editor.apply();
 
-                    authViewModel.sendSignupRequest(fname,mname ,lname, email, password);
+                    authViewModel.sendSignupRequest(fname, mname, lname, email, password);
 
 
                     authViewModel.getSignupError().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -87,7 +92,7 @@ public class Signup extends Fragment {
                         }
                     });
 
-                    authViewModel.getSignupToken().observe(getViewLifecycleOwner(), new Observer<String>() {
+                    authViewModel.getSignUpSuccessMsg().observe(getViewLifecycleOwner(), new Observer<String>() {
                         @Override
                         public void onChanged(String s) {
                             SharedPreferences signupStat = requireActivity().getSharedPreferences("SignupStatus", Context.MODE_PRIVATE);
@@ -97,7 +102,6 @@ public class Signup extends Fragment {
                             handleTokenChange(s);
                         }
                     });
-
                 }
 
             }
@@ -126,12 +130,6 @@ public class Signup extends Fragment {
                 setLocale("en"); // Set to English
             }
         });
-
-
-
-
-
-
     }
 
 
@@ -166,34 +164,34 @@ public class Signup extends Fragment {
     }
 
 
-
-    private boolean validateFields(String firstName,String middleName, String lastName, String email, String password, String confirmPass){
-        if (firstName.isEmpty()){
+    private boolean validateFields(String firstName, String middleName, String lastName, String email, String password, String confirmPass) {
+        if (firstName.isEmpty()) {
             FirstName.setError("First name is required");
             return false;
         }
-        if (lastName.isEmpty()){
+        if (lastName.isEmpty()) {
             LastName.setError("Last name is required");
             return false;
-        }if (middleName.isEmpty()){
+        }
+        if (middleName.isEmpty()) {
             MiddleName.setError("Last name is required");
             return false;
         }
-        if (email.isEmpty()){
+        if (email.isEmpty()) {
             Email.setError("Email field is required");
         }
 
-        if (!isValidEmail(email)){
+        if (!isValidEmail(email)) {
             Email.setError("Invalid Email Format");
             return false;
         }
 
-        if (password.length() < 6){
+        if (password.length() < 6) {
             Password.setError("Password must be at least 6 characters long");
             return false;
         }
 
-        if (confirmPass.equals(password)){
+        if (!confirmPass.equals(password)) {
             ConfirmPassword.setError("Password Don't Match");
             return false;
         }
@@ -201,23 +199,26 @@ public class Signup extends Fragment {
     }
 
 
-
-
-    private boolean isValidEmail(String email){
+    private boolean isValidEmail(String email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    private void handleTokenChange(String token) {
-        if (token != null && !token.isEmpty()) {
-            Toast.makeText(requireActivity(), "Registered Successfully!!", Toast.LENGTH_SHORT).show();
-            ((MainActivity) requireActivity()).swapFragments(new Login());
-            authViewModel.resetSignupTokenMutableData();
+    private void handleTokenChange(String m) {
+        if (m != null && !m.isEmpty()) {
+            if (m.equals("Registration successful! Please check your email for the OTP.")) {
+                Toast.makeText(requireActivity(), m, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(requireActivity(), "", Toast.LENGTH_SHORT).show();
+                Log.d("SignUp", "ur message: " + m);
+                ((MainActivity) requireActivity()).swapFragments(new OTP());
+                authViewModel.resetSignupTokenMutableData();
+            }
+
         }
     }
 
-    private void handleErrorChange(String error){
-        if (error!=null && !error.isEmpty()){
-            Toast.makeText(requireActivity(), "Error: "+error, Toast.LENGTH_SHORT).show();
+    private void handleErrorChange(String error) {
+        if (error != null && !error.isEmpty()) {
+            Toast.makeText(requireActivity(), "Error: " + error, Toast.LENGTH_SHORT).show();
             authViewModel.resetSignupErrorMutableData();
         }
     }

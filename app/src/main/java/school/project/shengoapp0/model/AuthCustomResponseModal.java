@@ -7,6 +7,12 @@ import java.util.Map;
 import okhttp3.ResponseBody;
 
 public class AuthCustomResponseModal {
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
     private String status;
 
     public String getStatus() {

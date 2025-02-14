@@ -26,10 +26,12 @@ import school.project.shengoapp0.R;
 import school.project.shengoapp0.adapters.dashboaredadapter.LawyerSliderAdapter;
 import school.project.shengoapp0.model.LawyersData;
 import school.project.shengoapp0.ui.others.MapActivity;
+import school.project.shengoapp0.ui.others.NotificationPage;
 
 public class Home extends Fragment {
     RecyclerView recyclerView;
     List<LawyersData> lawyersDataList= new ArrayList<>();
+    ImageView notificationIcon;
 
 
 
@@ -53,6 +55,22 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        notificationIcon = view.findViewById(R.id.notificationicon);
+        SharedPreferences NotificationFlag = requireActivity().getSharedPreferences("signuEmail", Context.MODE_PRIVATE);
+        Boolean notFlag = NotificationFlag.getBoolean("notification", false);
+//        notificationIcon.setImageResource(R.drawable.empty_notification);
+
+        if (notFlag){
+//            notificationIcon.setVisibility(View.GONE);
+            notificationIcon.setImageResource(R.drawable.notification_active);
+        }
+        notificationIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)requireActivity()).swapFragments(new NotificationPage());
+            }
+        });
 
         androidx.cardview.widget.CardView mapViewCardView = view.findViewById(R.id.mapView);
         // add onclick listener to the map view

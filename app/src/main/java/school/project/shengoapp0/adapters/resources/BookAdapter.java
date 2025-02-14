@@ -17,8 +17,15 @@ import school.project.shengoapp0.model.Book;
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     private List<Book> bookList;
 
-    public BookAdapter(List<Book> bookList) {
+    public interface OnItemClickListener {
+        void onItemClick(Book book);
+    }
+
+    private OnItemClickListener listener;
+
+    public BookAdapter(List<Book> bookList, OnItemClickListener listener) {
         this.bookList = bookList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -37,6 +44,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         // Set the PDF icon for all books
         holder.bookCover.setImageResource(R.drawable.pdf); // Replace with your PDF icon resource
+
+        holder.itemView.setOnClickListener(v -> {
+            listener.onItemClick(book); // Call the listener when the item is clicked
+        });
     }
 
     @Override

@@ -21,6 +21,7 @@ import java.util.List;
 import school.project.shengoapp0.R;
 import school.project.shengoapp0.adapters.resources.BookAdapter;
 import school.project.shengoapp0.model.Book;
+import school.project.shengoapp0.utilities.FileOpener;
 import school.project.shengoapp0.viewmodels.ResourceViewModel;
 
 public class Resources extends Fragment {
@@ -54,6 +55,7 @@ public class Resources extends Fragment {
 
 
 
+
         bookList = new ArrayList<>();
 
 
@@ -61,7 +63,19 @@ public class Resources extends Fragment {
             @Override
             public void onChanged(List<Book> books) {
                 if (books!=null){
-                    bookAdapter = new BookAdapter(books);
+                    bookAdapter = new BookAdapter(books, new BookAdapter.OnItemClickListener() {  //Setting the data
+                        @Override
+                        public void onItemClick(Book book) {
+//                            String pdfPath = "/storage/"+book.getFilePath();
+
+                            String pdfPath =book.getFilePath();
+                            String title = book.getTitle();
+                            String baseUrl = getContext().getString(R.string.base_url);
+                            FileOpener.openPdfFile(getContext(), pdfPath, title, baseUrl);
+//                            FileOpener.openPdfFile(getContext(), pdfPath); //Make a call
+                            Log.d("FIle path", ": "+pdfPath);
+                        }
+                    });
                     recyclerView.setAdapter(bookAdapter);
                 }
             }

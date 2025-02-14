@@ -23,7 +23,6 @@ public class UsersAutModal {
     public UsersAutModal(String firstName,
                          String middleName,
                          String lastName,
-
                          String email,
                          String passWord) {
         FirstName = firstName;

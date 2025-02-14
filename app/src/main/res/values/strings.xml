@@ -4,7 +4,7 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
     //BaseURL
-    <string name="base_url" translatable="false">http://192.168.186.196:8000</string>
+    <string name="base_url" translatable="false">http://192.168.153.253:8000</string>
 
 
     //Headers

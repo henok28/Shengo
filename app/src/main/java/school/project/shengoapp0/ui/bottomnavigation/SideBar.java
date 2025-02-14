@@ -113,7 +113,7 @@ public class SideBar extends Fragment {
 
     private void loadProfileImage(String profilePicturePath) {
         if (profilePicturePath != null && !profilePicturePath.isEmpty()) {
-            String BASE_URL = "http://192.168.1.2:8000/storage/";
+            String BASE_URL = "http://192.168.153.253:8000/storage/";
             String imageUrl =  BASE_URL+ profilePicturePath; // Construct the full URL
             Log.d("client profile", imageUrl);
 

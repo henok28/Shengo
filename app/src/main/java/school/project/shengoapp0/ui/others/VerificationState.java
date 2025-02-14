@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.google.android.material.button.MaterialButton;
 
 import school.project.shengoapp0.MainActivity;
 import school.project.shengoapp0.R;
+import school.project.shengoapp0.utilities.AuthStatUtil;
 import school.project.shengoapp0.utilities.FormUtils;
 import school.project.shengoapp0.utilities.VerificationStatus;
 public class VerificationState extends Fragment {
@@ -43,8 +45,16 @@ public class VerificationState extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
         FormUtils formUtils = new FormUtils(requireContext());
-        if (formUtils.getFormState() !=null && formUtils.getFormState() == "APPROVED" ||formUtils.getFormState() == "REJECTED"){
+        formUtils.clear();
+        AuthStatUtil authStatUtil = new AuthStatUtil(requireContext());
+//        formUtils.setFormState(authStatUtil.getVerificationStatusString());
+        if (authStatUtil.getVerificationStatusString().equals("verified")){
+            formUtils.setFormState("APPROVED");
+        }
+        if (formUtils.getFormState() !=null && formUtils.getFormState() == "A" +
+                "PPROVED" ||formUtils.getFormState() == "REJECTED"){
             if (formUtils.getFormState() == "APPROVED"){
+                Log.d("Verification State", formUtils.getFormState());
                 currentState = VerificationStatus.APPROVED;
             }else{
                 currentState = VerificationStatus.REJECTED;

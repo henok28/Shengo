@@ -54,8 +54,9 @@ public class ResourceRepo {
                         String title = resource.getTitle();
                         String catagory = resource.getCategory();
                         String description = resource.getDescription();
+                        String filePath = resource.getPdfFilePath();
 
-                        books.add(new Book(title, catagory, description));
+                        books.add(new Book(title, catagory, description, filePath));
 
                         ResourceResponse.setValue(books);
                         Log.d("Resource Title", "Title: " + books);

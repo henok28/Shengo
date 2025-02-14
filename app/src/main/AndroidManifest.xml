@@ -27,21 +27,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="tiramisu">
         <activity
+            android:name=".ui.chatui.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.others.MapActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.bottomnavigation.BaseDashboaredActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.autentication.BaseAuthenticationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.onboaredpage.OnboardingBaseActivity"
+            android:name=".ui.others.FeedbackActivity"
             android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="school.project.shengoapp0.fileprovider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
